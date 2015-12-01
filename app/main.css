@@ -7,17 +7,17 @@
   font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
   display: flex;
   flex-direction: row;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
 }
 .codepen button {
-  background: inherit;
+  background: none;
   border: none;
   color: inherit;
   cursor: pointer;
-  font-family: inherit;
+  font-family: Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
   margin: 0;
   padding: 0;
-  font-size: inherit;
+  font-size: 12px;
   outline: none;
 }
 .codepen ul.querytabs {
@@ -33,7 +33,7 @@
   margin: 4px 0;
   height: 24px;
   line-height: 24px;
-  padding: 4px;
+  padding: 0 4px;
   border-radius: 6px 0 0 6px;
   cursor: pointer;
 }
@@ -56,7 +56,7 @@
   font-variant: small-caps;
   font-weight: bold;
   margin: 0 0 6px 16px;
-  padding: 0 16px 2px 0;
+  padding-bottom: 2px;
 }
 .codepen .query .float,
 .codepen .result .float {
@@ -93,6 +93,35 @@
 .codepen .query {
   margin-right: 20px;
 }
+.codepen .result .latencycontainer {
+  font-size: 12px;
+  z-index: 1;
+  padding: 2px 16px;
+  margin-bottom: 4px;
+}
+.codepen .result .latencycontainer hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px dotted rgba(153, 153, 153, 0.2);
+  margin: 1px 2px;
+  padding: 0;
+}
+.codepen .result .latencycontainer em {
+  color: #ddd;
+  font-size: 10px;
+  font-style: normal;
+}
 .caption-text h2:last-child {
   margin-bottom: 0;
+}
+.caption-text h1 {
+  font-weight: 300;
+}
+.caption-text h2 {
+  font-weight: 100;
+}
+.buttonrow {
+  margin-top: 8px;
+  text-align: center;
 }

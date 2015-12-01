@@ -26,8 +26,6 @@ $(document).ready(function($) {
         });
     });
 
-    $("select").selectpicker();
-
 //  Initialize functions
 
     initializeReadMore();
@@ -68,71 +66,7 @@ $(document).ready(function($) {
         });
     }
 
-//  Animation on element appear
-
-    blockWrapper.appear();
-    blockWrapper.on('appear', function() {
-        $(this).addClass("show");
-        if( !numbers.hasClass("counting") && !numbers.hasClass("count-down") ){
-            initializeCounterUp();
-            numbers.addClass("counting");
-        }
-    });
-
-//  Fit videos to container width
-    var video = $(".video");
-
-    if(video.length > 0) {
-        video.fitVids();
-    }
-
-//  Navigation animation
-
-    $(".navigation-button, .navigation-items a").on("click", function() {
-        if( body.hasClass("show-nav") ){
-            body.removeClass("show-nav");
-            $.each( $(".navigation-items li"), function (i) {
-                var $this = $(this);
-                setTimeout(function(){
-                    $this.removeClass("idle");
-                }, i * 50);
-            });
-        }
-        else {
-            body.addClass("show-nav");
-            $.each( $(".navigation-items li"), function (i) {
-                var $this = $(this);
-                setTimeout(function(){
-                    $this.addClass("idle");
-                }, i * 50);
-            });
-        }
-    });
-    $(".overlay").on("click", function() {
-        body.removeClass("show-nav");
-    });
-
-//  Smooth Navigation Scrolling
-
-    $('.main-navigation .navigation-items a[href^="#"], a[href^="#"].roll').on('click',function (e) {
-        e.preventDefault();
-        var target = this.hash,
-            $target = $(target);
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top
-        }, 2000, 'swing', function () {
-            window.location.hash = target;
-        });
-    });
-
-//  Calendar
-    var inputDateRange = $(".input-daterange");
-    if( inputDateRange.length > 0 ){
-        inputDateRange.datepicker({
-            todayHighlight: true
-        });
-    }
-
+    blockWrapper.addClass("show");
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,24 +76,6 @@ $(document).ready(function($) {
 $(window).scroll(function () {
     var scrollAmount = $(window).scrollTop() / 4;
     scrollAmount = Math.round(scrollAmount);
-
-    if( !mainNavigation.hasClass("navigation-fix-to-top") ){
-        if ( $(window).scrollTop() >= navigationPosition ) {
-            mainNavigation.addClass('fix-to-top');
-        } else {
-            mainNavigation.removeClass('fix-to-top');
-        }
-    }
-
-    if ( $(window).scrollTop() > 0 ) {
-        if( !navigationHasBackground ){
-            mainNavigation.addClass('bg-dark bg-expand-left');
-        }
-    } else {
-        if( !navigationHasBackground ){
-            mainNavigation.removeClass('bg-dark bg-expand-left');
-        }
-    }
 
     if ($(window).width() > 768) {
         if($('.hero-slider').hasClass('has-parallax')){

@@ -68,6 +68,14 @@
 
                                             <div class=result>
                                                 <h2 class="resulttab">result</h2>
+                                                <div class="latencycontainer">
+                                                    Serverside latency: {{ latency_data.total }}<br/>
+                                                    &nbsp;&nbsp;parsing: {{latency_data.parsing}}<br/>
+                                                    &nbsp;&nbsp;processing: <em>{{latency_data.processing}}</em><br/>
+                                                    &nbsp;&nbsp;json generation: {{latency_data.json}}<br/>
+                                                    <hr/>
+                                                    Entities Returned: <em>{{latency_data.entity_count}}</em>
+                                                </div>
                                                 <div  ui-ace="{
                                                         useWrapMode : true,
                                                         showGutter: false,
@@ -80,7 +88,7 @@
 
                                         </div> <!-- /codepen -->
 
-                                        <div class="animate from-bottom">
+                                        <div class="buttonrow animate from-bottom">
                                             <a href="#boxes" class="btn btn-framed btn-light btn-default btn-xl roll">View More</a>
                                         </div>
 

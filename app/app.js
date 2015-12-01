@@ -74,14 +74,23 @@ angular.module('darthGraph', ['ui.ace']).
         });
 
         $scope.runQuery = function(query) {
+            var startTime = Date.now();
             $http({
                 url: 'http://dgraph.xyz/query',
                 method: 'POST',
                 data: query
             }).then(function(response) {
-                    $scope.query_result = response.data._root_&& response.data._root_[0];
-                    $scope.json_result = JSON.stringify($scope.query_result, null, 2);
-                }, function(error) {
+                $scope.query_result = response.data._root_&& response.data._root_[0];
+                $scope.json_result = JSON.stringify($scope.query_result, null, 2);
+
+                $scope.latency_data = response.data.server_latency || {};
+                $scope.latency_data.client_total_latency = Date.now() - startTime;
+                if ($scope.json_result) {
+                    $scope.latency_data.entity_count = $scope.json_result.replace(/"_uid_": /g, '"_uid_": 1').length - $scope.json_result.length;
+                } else {
+                    $scope.latency_data.entity_count = 0;
+                }
+            }, function(error) {
                     console.log(error);
                     alert('error: ' + error);
                 });
