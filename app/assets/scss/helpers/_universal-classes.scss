@@ -1,0 +1,153 @@
+//----------------------------------------------------------------------------------------------------------------------
+// Universal Classes
+//----------------------------------------------------------------------------------------------------------------------
+
+.center { text-align: center; }
+
+.no-margin { margin: 0; }
+
+.no-bottom-padding {
+  .block-content { padding-bottom: 0 !important; }
+}
+
+.no-padding {
+  .block-content { padding: 0 !important; }
+}
+
+.move-up { position: relative; top: -20px; }
+
+.text-align-right { text-align: right; }
+
+.bg { height: 100%;  position: absolute; width: 100%; top: 0; z-index: -1; overflow: hidden;
+  img { position: absolute; top: 0; }
+  &.carousel-presentation { z-index: 0; }
+}
+
+.block, .caption-text { @include transit; display: table; width: 100%; table-layout: fixed;
+  &.bg-expand-right {
+    .block-content { padding-left: 30px; }
+    .bg { left: 0; width: 2000px;
+      img { left: 0; }
+    }
+  }
+  &.bg-expand-left {
+    .block-content { padding-right: 30px; }
+    .bg { right: 0; width: 2000px;
+      img { right: 0; }
+    }
+  }
+
+  &.bg-expand-both {
+    .bg { left: -600px; width: 3000px; }
+  }
+
+  &.bg-dark, &.bg-default { color: #fff;
+    .bg { background-color: $color-black; }
+    a { color: #fff;
+      &:hover { color: $color-default; }
+    }
+    p { @include opacity(.8); color: #fff; }
+    blockquote { border-left: none;
+      footer { color: #fff; }
+      p { border-bottom-color: rgba(255,255,255,0.2); }
+    }
+    input[type="text"],input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control { border: none; }
+    hr {border-color: #fff; }
+    .box-icon {
+      h3 { border-bottom: 1px solid rgba(255,255,255,.1); }
+    }
+    .btn {
+      &.btn-default { color: $color-default;
+        &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px #fff); color: #fff; }
+      }
+      &.btn-primary {
+        &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px $color-default); color: #fff; }
+      }
+      &.btn-dark { background-color: $color-black; color: #fff;
+        &:hover, &:focus, &:active { background-color: darken($color-black, 15%); }
+        &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px #000); background-color: transparent; color: $color-black;
+          &:hover, &:focus, &:active { background-color: #000; color: #fff; }
+        }
+      }
+    }
+    .numbers { color: #fff; }
+  }
+
+  &.bg-light {
+    .bg { background-color: $color-grey-light; }
+  }
+
+  &.bg-white {
+    .bg { background-color: #fff; }
+  }
+
+  &.bg-default {
+    .bg { background-color: $color-default; }
+    .numbers {
+      .number {
+        .separator { background-color: #fff; }
+      }
+    }
+  }
+
+  &.bg-opacity-5 {
+    .bg { @include opacity(.05); }
+  }
+  &.bg-opacity-10 {
+    .bg { @include opacity(.1); }
+  }
+  &.bg-opacity-20 {
+    .bg { @include opacity(.2); }
+  }
+  &.bg-opacity-30 {
+    .bg { @include opacity(.3); }
+  }
+  &.bg-opacity-40 {
+    .bg { @include opacity(.4); }
+  }
+  &.bg-opacity-50 {
+    .bg { @include opacity(.5); }
+  }
+  &.bg-opacity-60 {
+    .bg { @include opacity(.6); }
+  }
+  &.bg-opacity-70 {
+    .bg { @include opacity(.7); }
+  }
+  &.bg-opacity-80 {
+    .bg { @include opacity(.8); }
+  }
+  &.bg-opacity-90 {
+    .bg { @include opacity(.9); }
+  }
+
+  &.half-margin {
+    .block-content { padding-top: 45px; padding-bottom: 45px; }
+  }
+
+  .block-content { display: table-cell; font-size: 16px; padding: 90px 0; position: relative; vertical-align: top; }
+
+  &.va-middle {
+    .block-content { vertical-align: middle; }
+  }
+}
+
+.block-wrapper {
+  .block-content, .carousel-presentation-image { @include opacity(0); @include transition(all .6s ease-in-out); @include scale(.98); }
+  &.show {
+    .block-content, .carousel-presentation-image { @include opacity(1); @include scale(1); }
+  }
+}
+
+.caption-text {
+  &.half-margin {
+    .block-content { padding-top: 20px !important; padding-bottom: 20px !important; }
+  }
+}
+
+.font-color-white { color: #fff; }
+.font-color-dark { color: $color-grey; }
+.text-color-white { color: #fff !important; }
+.text-color-dark { color: $color-black !important; }
+.text-color-light { color: $color-grey-light !important; }
+.text-color-default { color: $color-default !important; }

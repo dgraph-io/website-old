@@ -1,0 +1,164 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1200px and more
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@media (min-width: 1200px ) {
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 992px - 1199px
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@media (min-width: 992px) and (max-width: 1199px) {
+  address { font-size: 14px; }
+  body, a { font-size: 14px; }
+  blockquote {
+    footer { font-size: 16px; }
+    p { font-size: 16px; }
+  }
+  h1 { font-size: 36px; margin-bottom: 0px; margin-top: 0px;}
+  h2 { font-size: 24px; margin-bottom: 30px; margin-top: 0px; }
+  h3 { font-size: 20px; margin-bottom: 20px; margin-top: 10px; }
+  h4 { font-size: 16px; }
+  p { font-size: 14px; }
+  .block {
+    .block-content { padding: 60px 0; }
+  }
+  .carousel-presentation-description {
+    dl { font-size: 14px;
+      dd { margin-bottom: 5px; }
+    }
+  }
+  .contact-detail aside strong { font-size: 14px; }
+  .hero-slider .heading-wrapper .heading .bg-expand-right .block-content { padding-left: 30px; padding-top: 30px; padding-bottom: 30px; }
+  .hero-slider .numbers .number figure { font-size: 90px; }
+  .hero-slider .numbers .number { margin-bottom: 10px; }
+  .hero-slider .numbers .number aside { font-size: 16px; }
+  .hero-slider .numbers .number .separator { height: 100px; width: 2px; right: 0px; top: 0px; }
+  .numbers {
+    .number {
+      aside { font-size: 16px; }
+      figure { font-size: 48px; }
+    }
+  }
+  .pills-big .nav-pills > li > a { font-size: 16px; padding: 15px 0px; }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 768px - 979px
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@media (min-width: 768px) and (max-width: 991px) {
+  address { font-size: 14px; }
+  body, a { font-size: 14px; }
+  blockquote { padding-left: 40px;
+    footer { font-size: 14px; }
+    p { font-size: 14px; }
+    .quote-icon { font-size: 50px; top: -10px; }
+  }
+  h1 { font-size: 28px; margin-bottom: 0px; margin-top: 0px;}
+  h2 { font-size: 20px; margin-bottom: 15px; margin-top: 0px; }
+  h3 { font-size: 18px; margin-bottom: 15px; margin-top: 10px; }
+  h4 { font-size: 14px; }
+  input { font-size: 12px !important; }
+  p { font-size: 14px; }
+  .block {
+    .block-content { padding: 45px 0; font-size: 14px; }
+  }
+  .box-icon i { font-size: 28px; }
+  .btn.btn-xl, select.btn-xl { padding: 15px; font-size: 14px; }
+  .carousel-presentation-description {
+    dl { font-size: 14px;
+      dd { margin-bottom: 5px; }
+    }
+  }
+  .contact-detail aside strong { font-size: 14px; }
+  .hero-slider .heading-wrapper .heading .bg-expand-right .block-content { padding-left: 30px; padding-top: 30px; padding-bottom: 30px; }
+  .hero-slider .numbers .number figure { font-size: 72px; }
+  .hero-slider .numbers .number { margin-bottom: 10px; }
+  .hero-slider .numbers .number aside { font-size: 16px; }
+  .hero-slider .numbers .number .separator { height: 100px; width: 2px; right: 0px; top: 0px; }
+  .input-group.large .btn { padding: 12px; }
+  .nav-pills > li > a { font-size: 16px; }
+  .numbers {
+    .number {
+      aside { font-size: 12px; }
+      figure { font-size: 36px; }
+      .separator { right: -20px; }
+    }
+  }
+  .pills-big .nav-pills > li > a { font-size: 16px; padding: 15px 0px; }
+  .tab-content h3 { font-size: 28px; }
+  ul.list { font-size: 14px; }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// max to 767px
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@media (max-width: 767px) {
+  address { font-size: 14px; }
+  body, a { font-size: 14px; }
+  blockquote { padding-left: 40px;
+    footer { font-size: 14px; }
+    p { font-size: 14px; }
+    .quote-icon { font-size: 50px; top: -10px; }
+  }
+  h1 { font-size: 28px; margin-bottom: 0px; margin-top: 0px;}
+  h2 { font-size: 20px; margin-bottom: 15px; margin-top: 0px; }
+  h3 { font-size: 18px; margin-bottom: 15px; margin-top: 10px; }
+  h4 { font-size: 14px; }
+  input { font-size: 12px !important; }
+  p { font-size: 14px; }
+  .block-wrapper {
+    .block {
+      .block-content { padding: 40px 0; font-size: 14px; }
+      &.bg-expand-right, &.bg-expand-left {
+        .block-content { padding-left: 0; padding-right: 0; }
+        .bg { left: -600px; width: 3000px; }
+      }
+    }
+  }
+  .box-icon i { font-size: 28px; }
+  .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) { width: 100%; }
+  .btn.btn-xl, select.btn-xl { padding: 15px; font-size: 14px; }
+  .carousel-presentation-description {
+    dl { font-size: 14px;
+      dd { margin-bottom: 5px; }
+    }
+  }
+  .contact-detail aside strong { font-size: 14px; }
+  .hero-slider {
+    .input-group { width: 100%; }
+  }
+  .hero-slider .heading-wrapper .heading .bg-expand-right .block-content { padding-left: 30px; padding-top: 30px; padding-bottom: 30px; }
+  .hero-slider .heading-wrapper .heading.position-bottom { padding-bottom: 50px; }
+  .hero-slider .numbers .number figure { font-size: 40px; }
+  .hero-slider .numbers .number { margin-bottom: 10px; }
+  .hero-slider .numbers .number aside { font-size: 12px; }
+  .hero-slider .numbers .number .separator { height: 120px; width: 2px; right: 0px; top: -20px; }
+  .input-group.large .btn { padding: 12px; }
+  .logos { text-align: center;
+    .logo { display: block; }
+  }
+  .main-navigation .navigation-items li { float: none; }
+  .nav-pills > li > a { font-size: 16px; }
+  .numbers {
+    .number { margin-bottom: 20px;
+      aside { font-size: 14px; }
+      figure { font-size: 48px; }
+      .separator { bottom: -120px; left: 0; right: 0; transform: rotate(90deg); }
+    }
+  }
+  .presentation .description, .presentation .image { display: block; margin-bottom: 20px; text-align: center; }
+  .pills-big .nav-pills > li > a { font-size: 16px; padding: 15px 0px; }
+  .tab-content {
+    h3 { font-size: 28px; }
+    .schedule {
+      section {
+        .image { display: block; margin-left: 0px; float: none; margin-bottom: 20px; width: 150px; }
+        .description { margin-left: 0; }
+      }
+    }
+  }
+  ul.list { font-size: 14px; }
+  .vertical-aligned-elements .element { display: block; margin-bottom: 20px; width: 100%; text-align: center; white-space: inherit;
+    .pull-right, .pull-left { float: none !important; }
+  }
+}

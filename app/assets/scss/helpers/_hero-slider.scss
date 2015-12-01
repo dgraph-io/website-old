@@ -1,0 +1,49 @@
+//----------------------------------------------------------------------------------------------------------------------
+// Hero Slider
+//----------------------------------------------------------------------------------------------------------------------
+
+.hero-slider { position: relative;
+  input { border: none !important; }
+  .carousel-hero-slider-wrapper { overflow: hidden; }
+  .heading-wrapper { position: absolute; height: 100%; width: 100%; z-index: 2;
+    .inner { display: table; width: 100%; height: 100%; }
+    .caption { display: table-cell;
+      &.position-top { vertical-align: top; }
+      &.position-middle { vertical-align: middle; }
+      &.position-bottom { vertical-align: bottom; padding-bottom: 120px; }
+      .bg-expand-right {
+        .block-content { padding-left: 50px; }
+      }
+      .bg-expand-left {
+        .block-content { padding-right: 50px; }
+      }
+      .block-content { padding-top: 50px; padding-bottom: 50px; }
+      .main-navigation {
+        .block-content { padding: 20px; padding-left: 0;
+          //&.navigation-collapse { padding: 20px 30px; }
+        }
+        &.fix-to-top {
+          .block-content { padding-top: 10px; padding-bottom: 10px; padding-right: 0px;
+            //&.navigation-collapse { padding: 10px 20px; }
+          }
+        }
+      }
+    }
+  }
+  .carousel-hero-slider { height: 100%; z-index: 0;
+    div { height: 100%; }
+    .owl-item { height: 100%;
+      .image { overflow: hidden;
+        img { height: 100%; max-width: inherit; width: auto;
+          position: relative; }
+      }
+    }
+  }
+  .numbers { display: table; margin-bottom: 30px; width: 100%;
+    .number {
+      figure { font-size: 120px; }
+      aside { font-size: 24px; }
+      .separator { height: 140px; width: 3px; right: -20px; top: -25px; }
+    }
+  }
+}

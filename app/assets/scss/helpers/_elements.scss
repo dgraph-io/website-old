@@ -1,0 +1,70 @@
+//----------------------------------------------------------------------------------------------------------------------
+// Elements styling
+//----------------------------------------------------------------------------------------------------------------------
+
+a { @include transition(.2s); color: $color-black; font-size: 16px; font-weight: 500; outline: none !important;
+  &:hover, &:active, &:focus { color: $color-default; text-decoration: none; }
+  i { color: $color-default; vertical-align: middle; margin-left: 5px;
+    position: relative;
+    top: -2px;
+    font-size: 16px;
+  }
+}
+
+address { font-size: 16px; font-weight: 300;
+  figure {
+    .info { padding: 5px 0; }
+    i { color: $color-default; margin-right: 5px; }
+  }
+}
+
+body { background-color: #fff; color: $color-grey; font-size: 16px; font-family: 'Roboto', sans-serif; position: relative;
+  &.loading-done.show-nav {
+    .caption .animate:not(.main-navigation) { @include opacity(0); }
+    .overlay { -webkit-animation: fade-in-overlay 2s forwards; animation: fade-in-overlay 2s forwards; }
+    .main-navigation { @include transform(translateY(-10px)); }
+    .navigation-button {
+      figure {
+        &:first-child { @include transform( rotateZ(45deg) ); }
+        &:nth-child(2) { @include opacity(0); }
+        &:last-child { @include transform( rotateZ(-45deg) ); }
+      }
+    }
+    .navigation-items { visibility: visible; @include opacity(1); }
+  }
+}
+
+blockquote { border-left: none; padding-left: 60px; position: relative; margin-bottom: 0; width: 100%;
+  .quote-icon { color: $color-default; font-size: 70px; position: absolute; left: 0px; top: -20px; }
+  .image { @include border-radius(50%); float: left; margin-right: 20px; width: 100px; overflow: hidden; position: relative; z-index: 1; }
+  p { border-bottom: 1px solid rgba(0,0,0,.05); font-style: italic; font-size: 18px; }
+  footer { font-size: 18px; font-weight: normal; }
+}
+
+dl { width: 100%;
+  dt { float: left; font-weight: 500; width: 50%; }
+  dd { float: left; margin-bottom: 4px; text-align: right; width: 50%; }
+}
+
+footer {
+  p { padding: 0; }
+}
+
+h1 { font-size: 50px; font-weight: 100; margin-bottom: 0px; margin-top: 0px;}
+h2 { font-size: 28px; font-weight: 300; margin-bottom: 30px; margin-top: 0px; }
+h3 { font-size: 24px; font-weight: 300; margin-bottom: 20px; margin-top: 10px; }
+h4 { font-size: 18px; font-weight: 300; }
+
+hr { margin-bottom: 15px; margin-top: 15px; }
+
+img { max-width: 100%; }
+
+p { @include opacity(.5); color: $color-black; font-weight: 400; font-size: 16px; padding: 10px 0; }
+
+ul.list { list-style: none; font-size: 16px; padding-left: 0px;
+  li { padding: 5px 0;
+    &:before { @include font-awesome; content: "\f111"; color: $color-default; font-size: 4px; vertical-align: middle; position: relative; top: -2px; padding-right: 15px; }
+  }
+}
+
+strong { font-weight: 400; }

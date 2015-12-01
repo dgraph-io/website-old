@@ -75,7 +75,7 @@ angular.module('darthGraph', ['ui.ace']).
 
         $scope.runQuery = function(query) {
             $http({
-                url: 'http://dgraph.xyz:8080/query',
+                url: 'http://dgraph.xyz/query',
                 method: 'POST',
                 data: query
             }).then(function(response) {

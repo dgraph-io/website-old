@@ -1,0 +1,74 @@
+//----------------------------------------------------------------------------------------------------------------------
+// Forms
+//----------------------------------------------------------------------------------------------------------------------
+
+input[type="text"],input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"], input[type="number"], input[type="tel"], textarea.form-control { @include box-shadow(none); @include border-radius(0px); @include transition(.3s); -webkit-appearance: none; background-color: #fff; border: 1px solid $color-grey-rgba; font-size: 16px; font-weight: 400; outline: none !important; padding: 7px 9px 8px; width: 100%; height: inherit;
+  &.framed { border: 1px solid $color-grey-rgba !important; font-size: 18px; padding-top: 10px; padding-bottom: 10px; }
+  &:active, &:focus { @include box-shadow(none); border-color: rgba(0,0,0,0.2);  }
+  &:hover { @include box-shadow(none); border-color: rgba(0,0,0,0.25); }
+}
+
+.form-group {
+  label { font-weight: 500; font-size: 14px; margin-bottom: 10px; }
+}
+
+button { outline: none !important;
+  &:hover, &:active, &:focus { outline: none !important; }
+}
+
+.btn, select { @include border-radius(0); @include transit; border: none; font-weight: 500; font-size: 12px; text-transform: uppercase; padding: 10px 15px;
+  &.btn-default { background-color: $color-grey-rgba; color: $color-black;
+    &:hover, &:focus, &:active { background-color: rgba(0,0,0,.15); }
+  }
+  &.btn-primary { background-color: $color-default; color: #fff;
+    &:hover, &:focus, &:active { background-color: darken($color-default, 15%); }
+    &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px $color-default); color: $color-black;
+      &:hover, &:focus, &:active { background-color: $color-default; color: #fff; }
+    }
+    i { color: #fff; }
+  }
+  &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px $color-grey-rgba); background-color: transparent;
+    &:hover, &:focus, &:active { background-color: $color-grey-rgba; }
+  }
+  &.btn-rounded { @include border-radius(3px); }
+  &.btn-xl { padding: 20px; font-size: 18px; }
+  &.btn-large { padding: 12px; font-size: 16px; font-weight: 400; }
+  &.btn-dark { background-color: $color-black; color: #fff;
+    &:hover, &:focus, &:active { background-color: darken($color-black, 15%); }
+    &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px #000); background-color: transparent; color: $color-black;
+      &:hover, &:focus, &:active { background-color: #000; color: #fff; }
+    }
+  }
+  &.btn-light { background-color: #fff; color: $color-black;
+    &:hover, &:focus, &:active { background-color: $color-grey-light; }
+    &.btn-framed { @include box-shadow(inset 0px 0px 0px 2px #fff); background-color: transparent; color: #fff;
+      &:hover, &:focus, &:active { background-color: #fff; color: $color-grey; }
+    }
+  }
+}
+
+.btn-group.open .dropdown-toggle { @include box-shadow(none); }
+
+.bootstrap-select { border: 1px solid $color-grey-rgba;
+  .btn { background-color: #fff; color: $color-black; }
+  &.large {
+    .btn { font-size: 18px; text-transform: none; font-weight: 400; }
+  }
+}
+
+.dropdown-menu { @include border-radius(0); border: none; padding: 0;
+  > li > a { padding: 10px 20px; }
+}
+
+.input-group {
+  &.large {
+    input { padding: 12px 8px 12px; }
+    .btn { padding: 15px; }
+  }
+}
+
+.inputs-stacked { padding: 30px;
+  .form-group { margin-top: 5px; margin-bottom: 5px;
+    .bootstrap-select, .btn { width: 100% !important; }
+  }
+}
