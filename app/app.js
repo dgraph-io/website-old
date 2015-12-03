@@ -28,6 +28,9 @@ angular.module('darthGraph', ['ui.ace']).
 "                    }\n" +
 "                    type.object.name.en\n" +
 "                }\n" +
+"                film.performance.character {\n" +
+"                    type.object.name.en\n" +
+"                }\n" +
 "            }\n" +
 "            film.film.initial_release_date\n" +
 "            film.film.country\n" +
@@ -136,6 +139,19 @@ angular.module('darthGraph')
                         scope.summary = scope.get_summary(newVal, scope.fields);
                     });
 
+                    scope.$on('force_expand', function() {
+                        scope.expanded = true;
+                        console.log('expanding ', scope.obj);
+                        for (var i = 0; i < scope.fields.length; i++) {
+                            scope.fields[i].expanded = true;
+                        }
+                    });
+
+                    scope.expand_all = function() {
+                        scope.expanded = true;
+                        scope.$broadcast('force_expand');
+                    };
+
                     scope.get_fields = function(obj) {
                         var fields = [];
                         for (var k in obj) {
@@ -176,15 +192,19 @@ angular.module('darthGraph')
                             }
                         }
                         var children = 0;
+                        var title = obj['_uid_'];
                         for (var i = 0; i < fields.length; i++) {
                             if (fields[i].subobj) {
                                 children++;
                             } else if (fields[i].array) {
                                 children += fields[i].array.length;
                             }
+                            if (fields[i].key.indexOf('type.object.name.') == 0) {
+                                title = fields[i].value;
+                            }
                         }
                         return {
-                            title: obj['type.object.name.en'] || obj['_uid_'],
+                            title: title,
                             fields: fields.length,
                             children: children
                         };

@@ -97,13 +97,20 @@
 .codepen .query {
   margin-right: 20px;
 }
-.codepen .result .latencycontainer {
+.codepen .result {
   font-size: 12px;
+}
+.codepen .result .spinner {
+  color: #f99157;
+  margin-bottom: 4px;
+}
+.codepen .result .latencycontainer {
   z-index: 1;
   padding: 2px 16px;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
-.codepen .result .latencycontainer tr.total {
+.codepen .result .latencycontainer tr.total,
+.codepen .result .latencycontainer tr.entities {
   color: #f99157;
 }
 .codepen .result .latencycontainer td:first-child {
@@ -112,14 +119,10 @@
 .codepen .result .latencycontainer td:last-child {
   text-align: right;
 }
-.codepen .result .latencycontainer tr.entities {
-  border-top: 1px dotted rgba(153, 153, 153, 0.2);
-  border-bottom: 1px dotted rgba(153, 153, 153, 0.2);
-  color: #66cccc;
-}
 .codepen .tabcontainer {
-  border-bottom: 1px dotted #444;
   margin: 0 0 6px -2px;
+  border-top: 1px dotted #444;
+  padding-top: 8px;
 }
 .codepen .resulttab {
   border: 1px solid #999;
@@ -140,9 +143,11 @@
 .codepen .treenode {
   border: 1px solid #999;
   margin-right: 4px;
+  color: #ccc;
 }
 .codepen .treenode .title {
   background-color: #393939;
+  color: #fff;
   padding: 0 4px 1px;
   margin-bottom: 1px;
 }
@@ -150,14 +155,13 @@
   margin-left: 16px;
 }
 .codepen .treenode .key {
-  font-size: 12px;
-  color: #999;
+  color: #99cc99;
 }
 .codepen .treenode .field {
   margin: 0 4px;
+  border-bottom: 1px dotted #666;
 }
 .codepen .treenode .arrayoutline {
-  font-size: 12px;
   color: #999;
 }
 .codepen .treenode [ng-click] {

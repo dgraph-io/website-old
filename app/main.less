@@ -110,13 +110,19 @@
   }
 
   .result {
+    font-size: 12px;
+
+    .spinner {
+      color: #f99157;
+      margin-bottom: 4px;
+    }
+
     .latencycontainer {
-      font-size: 12px;
       z-index: 1;
       padding: 2px 16px;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
 
-      tr.total {
+      tr.total, tr.entities {
         color:#f99157;
       }
       td:first-child {
@@ -126,17 +132,14 @@
       td:last-child {
         text-align: right;
       }
-      tr.entities {
-        border-top: 1px dotted rgba(153,153,153,0.2);
-        border-bottom: 1px dotted rgba(153,153,153,0.2);
-        color: #66cccc;
-      }
     }
   }
 
   .tabcontainer {
-    border-bottom: 1px dotted #444;
     margin: 0 0 6px -2px;
+
+    border-top: 1px dotted #444;
+    padding-top: 8px;
   }
   .resulttab {
     &.active {
@@ -158,9 +161,15 @@
   .treenode {
     border: 1px solid #999;
     margin-right: 4px;
+    color: #ccc;
+
+    .odd .title {
+      //background-color: #cccccc;
+    }
 
     .title {
       background-color: #393939;
+      color: #fff;
       padding: 0 4px 1px;
       margin-bottom: 1px;
     }
@@ -169,14 +178,13 @@
       margin-left: 16px;
     }
     .key {
-      font-size: 12px;
-      color: #999;
+      color: #99cc99;
     }
     .field {
       margin: 0 4px;
+      border-bottom: 1px dotted #666;
     }
     .arrayoutline {
-      font-size: 12px;
       color: #999;
     }
 

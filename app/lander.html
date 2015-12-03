@@ -74,9 +74,19 @@
                                             </div>
 
                                             <div class=result>
-                                                <table class="latencycontainer">
+                                                <span class='spinner' ng-show="isNetPending()">
+                                                    <i class="fa fa-spinner icon-myspin"></i>
+                                                    Processing...
+                                                </span>
+                                                <table class="latencycontainer" ng-hide="isNetPending()">
+                                                    <tr class="entities">
+                                                        <td>Entities found</td>
+                                                        <td>:</td>
+                                                        <td>{{latency_data.entity_count}}</td>
+                                                    </tr>
                                                     <tr class="total">
-                                                        <td><i class="fa fa-spinner icon-myspin" ng-show="isNetPending()"></i> Server latency</td>
+                                                        <td>Server latency</td>
+                                                        <td>:</td>
                                                         <td>{{ latency_data.total }}</td>
                                                     </tr>
                                                     <!-- <tr>
@@ -84,16 +94,14 @@
                                                         <td>{{ latency_data.parsing }}</td>
                                                     </tr><!-- -->
                                                     <tr>
-                                                        <td class="processing">processing</td>
+                                                        <td class="processing">Processing</td>
+                                                        <td>:</td>
                                                         <td>{{latency_data.processing}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="jsongen">json generation</td>
+                                                        <td class="jsongen">JSON Conversion</td>
+                                                        <td>:</td>
                                                         <td>{{latency_data.json}}</td>
-                                                    </tr>
-                                                    <tr class="entities">
-                                                        <td>Entities Found</td>
-                                                        <td>{{latency_data.entity_count}}</td>
                                                     </tr>
                                                 </table>
                                                 <div class="tabcontainer">
@@ -131,7 +139,7 @@
                                                         {{summary.title}}
                                                     </div>
                                                     <div ng-if="expanded" ng-repeat="field in fields" class="field">
-                                                        <div class="key">{{field.key}}:</div>
+                                                        <div class="key">{{field.key}}</div>
                                                         <div class="atomvalue"> {{field.value}}</div>
                                                         <div class="objvalue">
                                                             <tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
@@ -147,7 +155,17 @@
                                                                         <i class="fa fa-minus-circle"></i>
                                                                         {{field.array.length}} item{{field.array.length!=1?'s':''}}
                                                                     </div>
-                                                                    <tree ng-repeat="el in field.array" obj="el" expanded="false"></tree>
+                                                                    <table>
+                                                                        <tr ng-repeat="el in field.array track by el._uid_">
+                                                                            <td>{{$index}}&nbsp;</td>
+                                                                            <td>
+                                                                                <tree
+                                                                                      ng-class-odd='"odd"'
+                                                                                      obj="el"
+                                                                                      expanded="false"></tree>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
                                                                 </div>
                                                             </div>
                                                         </div>
