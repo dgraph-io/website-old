@@ -97,8 +97,16 @@
                                                     </tr>
                                                 </table>
                                                 <div class="tabcontainer">
-                                                    <h2 class="resulttab {result_json ? 'active' : ''}">json</h2>
-                                                    <h2 class="resulttab {!result_json ? 'active' : ''}">tree</h2>
+                                                    <h2 class="resulttab"
+                                                        ng-class="{active: result_json}"
+                                                        ng-click="result_json=true">
+                                                        json
+                                                    </h2>
+                                                    <h2 class="resulttab"
+                                                        ng-class="{active:!result_json}"
+                                                        ng-click="result_json=false">
+                                                        tree
+                                                    </h2>
                                                 </div>
                                                 <div ui-ace="{
                                                         useWrapMode : true,
@@ -109,7 +117,7 @@
                                                      ng-model="json_result"
                                                      ng-show="result_json"
                                                      class=editor></div>
-                                                <div class="tree" ng-show="!result_tree">
+                                                <div class="tree" ng-if="!result_json">
                                                     <tree obj="query_result" expanded="true"></tree>
                                                     <div ng-if="!query_result">query result is not available</div>
                                                 </div>
