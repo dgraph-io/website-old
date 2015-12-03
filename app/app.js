@@ -73,13 +73,27 @@ angular.module('darthGraph', ['ui.ace']).
             $scope.runQuery(newCode);
         });
 
+        $scope.isNetPending = function() {
+            return $scope.lastSentVersion != $scope.lastReceivedVersion;
+        }
+
         $scope.runQuery = function(query) {
             var startTime = Date.now();
+            $scope.lastSentVersion = $scope.lastSentVersion || 0;
+            var currentCodeVersion = ++$scope.lastSentVersion;
+            console.log('start', currentCodeVersion, $scope.lastSentVersion);
             $http({
                 url: 'http://dgraph.xyz/query',
                 method: 'POST',
                 data: query
             }).then(function(response) {
+                if (currentCodeVersion != $scope.lastSentVersion) {
+                    // Ignore anything but the latest request.
+                    return;
+                }
+                $scope.had_network_error = false;
+                $scope.lastReceivedVersion = currentCodeVersion;
+
                 $scope.query_result = response.data._root_&& response.data._root_[0];
                 $scope.json_result = JSON.stringify($scope.query_result, null, 2);
 
@@ -91,8 +105,91 @@ angular.module('darthGraph', ['ui.ace']).
                     $scope.latency_data.entity_count = 0;
                 }
             }, function(error) {
-                    console.log(error);
-                    alert('error: ' + error);
-                });
+                console.log(error);
+                $scope.had_network_error = true;
+            });
+        };
+    });
+
+angular.module('darthGraph')
+    .directive("tree", function($compile) {
+        return {
+            restrict: "E",
+            scope: {
+                obj: '=',
+                expanded:'='
+            },
+            templateUrl: 'tree_node.html',
+            compile: function(tElement, tAttr) {
+                var contents = tElement.contents().remove();
+                var compiledContents;
+                return function(scope, iElement, iAttr) {
+                    if(!compiledContents) {
+                        compiledContents = $compile(contents);
+                    }
+                    compiledContents(scope, function(clone, scope) {
+                        iElement.append(clone);
+                    });
+
+                    scope.$watch('obj', function(newVal) {
+                        scope.fields = scope.get_fields(newVal);
+                        scope.summary = scope.get_summary(newVal, scope.fields);
+                    });
+
+                    scope.get_fields = function(obj) {
+                        var fields = [];
+                        for (var k in obj) {
+                            if (fields.length > 10) {
+                                break;
+                            }
+                            if (!obj.hasOwnProperty(k)) {
+                                continue;
+                            }
+                            if (typeof obj[k] == "string" || typeof obj[k] == "number" || obj[k] === null || obj[k] === undefined) {
+                                fields.push({
+                                    key:k,
+                                    value: obj[k]
+                                });
+                                continue;
+                            }
+                            if (obj[k] instanceof Array) {
+                                fields.push({
+                                    key: k,
+                                    array: obj[k]
+                                });
+                            } else {
+                                fields.push({
+                                    key: k,
+                                    subobj: obj[k]
+                                });
+                            }
+                        }
+                        return fields;
+                    };
+
+                    scope.get_summary = function(obj, fields) {
+                        if (obj === null || obj === undefined) {
+                            return {
+                                title: "<n/a>",
+                                fields: [],
+                                children: 0
+                            }
+                        }
+                        var children = 0;
+                        for (var i = 0; i < fields.length; i++) {
+                            if (fields[i].subobj) {
+                                children++;
+                            } else if (fields[i].array) {
+                                children += fields[i].array.length;
+                            }
+                        }
+                        return {
+                            title: obj['type.object.name.en'] || obj['_uid_'],
+                            fields: fields.length,
+                            children: children
+                        };
+                    };
+                };
+            }
         };
     });

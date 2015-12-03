@@ -1,6 +1,10 @@
 
 
 .codepen {
+  &.ng-cloak {
+    display: none !important;
+  }
+
   border: 1px solid #222;
   background-color: #2d2d2d;
   border-radius: 2px;
@@ -53,17 +57,18 @@
   .query, .result {
     display: flex;
     min-height: 50vh;
+    max-height: 75vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: #2d2d2d;
     flex: 1;
     flex-direction: column;
     position: relative;
 
     h2 {
-      border-bottom: 1px dotted #444;
       font-size: 16px;
       font-variant: small-caps;
       font-weight: bold;
-      margin: 0 0 6px 16px;
       padding-bottom: 2px;
     }
 
@@ -109,22 +114,71 @@
       font-size: 12px;
       z-index: 1;
       padding: 2px 16px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
 
-      hr {
-        display: block;
-        height: 1px;
-        border: 0;
+      tr.total {
+        color:#f99157;
+      }
+      td:first-child {
+        //text-align: right;
+        padding-right: 10px;
+      }
+      td:last-child {
+        text-align: right;
+      }
+      tr.entities {
         border-top: 1px dotted rgba(153,153,153,0.2);
-        margin: 1px 2px;
-        padding: 0;
+        border-bottom: 1px dotted rgba(153,153,153,0.2);
+        color: #66cccc;
       }
+    }
+  }
 
-      em {
-        color: #ddd;
-        font-size: 10px;
-        font-style: normal;
-      }
+  .tabcontainer {
+    border-bottom: 1px dotted #444;
+    margin: 0 0 6px -2px;
+  }
+  .resulttab {
+    &.active {
+      background-color: #ccc;
+      color: #2d2d2d;
+    }
+    border: 1px solid #999;
+    border-bottom: none;
+    cursor: pointer;
+    margin: 0 2px;
+    width: 45px;
+    text-align: center;
+    border-radius: 4px 4px 0 0;
+    padding: 0 2px;
+    display: block;
+    float: left;
+  }
+
+  .treenode {
+    border: 1px solid #999;
+    margin-right: 4px;
+
+    .title {
+      background-color: #393939;
+      padding: 0 4px 1px;
+      margin-bottom: 1px;
+      cursor: pointer;
+    }
+
+    .value {
+      margin-left: 16px;
+    }
+    .key {
+      font-size: 12px;
+      color: #999;
+    }
+    .field {
+      margin: 0 4px;
+    }
+    .arrayoutline {
+      font-size: 12px;
+      color: #999;
     }
   }
 }
@@ -146,4 +200,21 @@
 .buttonrow {
   margin-top: 8px;
   text-align: center;
+}
+
+.icon-myspin {
+  display: inline-block;
+  animation: eightsteps 1s steps(1) infinite;
+}
+
+@keyframes eightsteps {
+  0% { transform: rotate(0deg); }
+  12.5% { transform: rotate(45deg); }
+  25% { transform: rotate(90deg); }
+  37.5% { transform: rotate(135deg); }
+  50% { transform: rotate(180deg); }
+  62.5% { transform: rotate(225deg); }
+  75% { transform: rotate(270deg); }
+  87.5% { transform: rotate(315deg); }
+  100% { transform: rotate(360deg); }
 }

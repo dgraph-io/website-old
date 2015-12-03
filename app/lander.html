@@ -43,7 +43,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="codepen animate from-bottom" ng-app="darthGraph" ng-controller="GraphMagic">
+                                        <div class="codepen animate from-bottom ng-cloak" ng-app="darthGraph" ng-controller="GraphMagic">
 
                                             <ul class=querytabs>
                                                 <li ng-repeat='tab in examples' ng-click='activate($index)' class="{{tab.active ? 'active' : ''}}">
@@ -58,6 +58,13 @@
                                                        showGutter: false,
                                                        theme:'tomorrow_night_eighties',
                                                        mode: 'javascript',
+                                                       onLoad: queryEditorLoaded,
+                                                       require: ['ace/ext/language_tools'],
+                                                       advanced: {
+                                                           enableSnippets: true,
+                                                           enableBasicAutocompletion: true,
+                                                           enableLiveAutocompletion: true
+                                                       },
                                                      }"
                                                      ng-model="active_tab.code" class=editor></div>
                                                 <div class=float>
@@ -67,25 +74,76 @@
                                             </div>
 
                                             <div class=result>
-                                                <h2 class="resulttab">result</h2>
-                                                <div class="latencycontainer">
-                                                    Serverside latency: {{ latency_data.total }}<br/>
-                                                    &nbsp;&nbsp;parsing: {{latency_data.parsing}}<br/>
-                                                    &nbsp;&nbsp;processing: <em>{{latency_data.processing}}</em><br/>
-                                                    &nbsp;&nbsp;json generation: {{latency_data.json}}<br/>
-                                                    <hr/>
-                                                    Entities Returned: <em>{{latency_data.entity_count}}</em>
+                                                <table class="latencycontainer">
+                                                    <tr class="total">
+                                                        <td><i class="fa fa-spinner icon-myspin" ng-show="isNetPending()"></i> Server latency</td>
+                                                        <td>{{ latency_data.total }}</td>
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <td class="parsing">parsing</td>
+                                                        <td>{{ latency_data.parsing }}</td>
+                                                    </tr><!-- -->
+                                                    <tr>
+                                                        <td class="processing">processing</td>
+                                                        <td>{{latency_data.processing}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="jsongen">json generation</td>
+                                                        <td>{{latency_data.json}}</td>
+                                                    </tr>
+                                                    <tr class="entities">
+                                                        <td>Entities Found</td>
+                                                        <td>{{latency_data.entity_count}}</td>
+                                                    </tr>
+                                                </table>
+                                                <div class="tabcontainer">
+                                                    <h2 class="resulttab {result_json ? 'active' : ''}">json</h2>
+                                                    <h2 class="resulttab {!result_json ? 'active' : ''}">tree</h2>
                                                 </div>
-                                                <div  ui-ace="{
+                                                <div ui-ace="{
                                                         useWrapMode : true,
                                                         showGutter: false,
                                                         theme:'tomorrow_night_eighties',
                                                         mode: 'javascript',
-                                                      }"
-                                                      ng-model="json_result"
-                                                      class=editor></div>
+                                                     }"
+                                                     ng-model="json_result"
+                                                     ng-show="result_json"
+                                                     class=editor></div>
+                                                <div class="tree" ng-show="!result_tree">
+                                                    <tree obj="query_result" expanded="true"></tree>
+                                                    <div ng-if="!query_result">query result is not available</div>
+                                                </div>
+                                                <div ng-if="had_network_error" style="color:#f2777a">Error talking to server</div>
                                             </div>
 
+
+                                            <script type="text/ng-template" id="tree_node.html">
+                                                <div ng-if="obj" class="treenode">
+                                                    <div class="title" ng-click="expanded=!expanded">
+                                                        {{summary.title}}
+                                                    </div>
+                                                    <div ng-if="expanded" ng-repeat="field in fields" class="field">
+                                                        <div class="key">{{field.key}}:</div>
+                                                        <div class="atomvalue"> {{field.value}}</div>
+                                                        <div class="objvalue">
+                                                            <tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
+                                                            <div ng-if="field.array">
+                                                                <div class="arraysummary" ng-if="!field.expanded">
+                                                                    <i class="fa fa-plus-circle" ng-click="field.expanded=true"></i>
+                                                                    {{field.array.length}} item{{field.array.length!=1?'s':''}}
+                                                                </div>
+                                                                <div ng-if="field.expanded">
+                                                                    <div class="arrayoutline">
+                                                                        <i class="fa fa-minus-circle" ng-click="field.expanded=false"></i>
+                                                                        {{field.array.length}} item{{field.array.length!=1?'s':''}}
+                                                                    </div>
+                                                                    <tree ng-repeat="el in field.array" obj="el" expanded="false"></tree>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </script>
                                         </div> <!-- /codepen -->
 
                                         <div class="buttonrow animate from-bottom">
@@ -138,13 +196,14 @@
         <div class="container">
             <div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
                 <div class="block-content">
-                    <h2>Features</h2>
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <div class="box-icon">
                                 <i class="icon_clock_alt"></i>
-                                <h3>Low Latency</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla, libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                <h3>Low Latency, High Throughput</h3>
+                                <p>
+                                    Written in Go - the best language in the world (according to people who like that language).
+                                    DGraph uses multiple CPU cores, channels, caching, big-O analysis, variables, branches, loops and bytes to achieve ultimate performance.
                                 </p>
                             </div>
                             <!--/ .box-icon-->
@@ -154,7 +213,8 @@
                             <div class="box-icon">
                                 <i class="icon_flowchart"></i>
                                 <h3>Distributed and Scalable</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla, libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                <p>
+                                    Easily scale to multiple machines, datacenters, regions and planets. Telepathic replication and time travel will be committed to Github in June 2013.
                                 </p>
                             </div>
                             <!--/ .box-icon-->
@@ -164,7 +224,8 @@
                             <div class="box-icon">
                                 <i class="icon_lightbulb_alt"></i>
                                 <h3>Open Source</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla, libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                <p>
+                                    "I like my relationship like I like my source - open!" -- Manish Jain (never said that)
                                 </p>
                             </div>
                             <!--/ .box-icon-->
@@ -172,53 +233,6 @@
                         <!--/ .col-md-4 col-sm-4-->
                     </div>
                     <!--/ .row-->
-                    <div class="bg"></div>
-                    <!--/ .bg-->
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
-    <!--/ .block-wrapper-->
-
-    <section class="block-wrapper" id="be-smarter">
-        <div class="container">
-            <div class="block x-va-middle">
-                <div class="block-content">
-                    <div class="presentation">
-                        <div class="description">
-                            <h2>Be Smarter with Our Application</h2>
-                            <figure>
-                                <i class="icon_cloud-upload_alt"></i>
-                                <h3>Secure Cloud Data</h3>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
-                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
-                                </p>
-                            </figure>
-                            <figure>
-                                <i class="icon_camera_alt "></i>
-                                <h3>Your Memories in Your Photos</h3>
-                                <hr>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
-                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
-                                </p>
-                            </figure>
-                        </div>
-                        <!--/ .description-->
-                        <div class="image">
-                            <div class="center">
-                                <img src="assets/img/app-phones.png" alt="">
-                            </div>
-                            <!--/ .center-->
-                        </div>
-                        <!--/ .image-->
-                    </div>
-                    <!--/ .presentation-->
                     <div class="bg"></div>
                     <!--/ .bg-->
                 </div>
@@ -721,6 +735,7 @@
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ext-language_tools.js"></script>
 <script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
 <script src="app.js"></script>
 
