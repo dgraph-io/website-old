@@ -136,13 +136,15 @@
                                                         <div class="objvalue">
                                                             <tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
                                                             <div ng-if="field.array">
-                                                                <div class="arraysummary" ng-if="!field.expanded">
-                                                                    <i class="fa fa-plus-circle" ng-click="field.expanded=true"></i>
+                                                                <div class="arraysummary"
+                                                                     ng-if="!field.expanded"
+                                                                     ng-click="field.expanded=true">
+                                                                    <i class="fa fa-plus-circle"></i>
                                                                     {{field.array.length}} item{{field.array.length!=1?'s':''}}
                                                                 </div>
                                                                 <div ng-if="field.expanded">
-                                                                    <div class="arrayoutline">
-                                                                        <i class="fa fa-minus-circle" ng-click="field.expanded=false"></i>
+                                                                    <div class="arrayoutline" ng-click="field.expanded=false">
+                                                                        <i class="fa fa-minus-circle"></i>
                                                                         {{field.array.length}} item{{field.array.length!=1?'s':''}}
                                                                     </div>
                                                                     <tree ng-repeat="el in field.array" obj="el" expanded="false"></tree>
