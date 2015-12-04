@@ -1,75 +1,779 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="darthGraph" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="darthGraph" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="darthGraph" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="darthGraph" class="no-js"> <!--<![endif]-->
+
+<html lang="en-US">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>D-Graph - High Performance Distributed Graph Database</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="main.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Manish Rai Jain">
+
+    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="assets/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,400,100,300,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
+
+    <link rel="stylesheet" href="assets/css/color-red-medium.css" type="text/css">
+
+    <title>DGraph - Scalable, Distributed, Low Latency, High Throughput Graph Database</title>
+
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
-<body ng-controller="GraphMagic">
 
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<body>
+<div class="overlay"></div>
+
+<div class="page-wrapper">
+
+    <section class="hero-slider has-parallax">
+        <div class="heading-wrapper">
+            <div class="inner">
+                <div class="caption position-middle">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="block x-va-middle">
+                                    <div class="block-content">
+                                        <div class="caption-text animate from-bottom">
+                                            <div class="block-content">
+                                                <h1 class="font-color-white">DGraph</h1>
+                                                <h2 class="font-color-white">Scalable, Distributed, Low Latency, High Throughput Graph Database.</h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="codepen animate from-bottom ng-cloak" ng-app="darthGraph" ng-controller="GraphMagic">
+
+                                            <ul class=querytabs>
+                                                <li ng-repeat='tab in examples' ng-click='activate($index)' class="{{tab.active ? 'active' : ''}}">
+                                                    <button ng-click='activate($index)'>{{ tab.title}}</button>
+                                                </li>
+                                            </ul>
+
+                                            <div class=query>
+                                                <h2>graphql query</h2>
+                                                <div ui-ace="{
+                                                       useWrapMode : true,
+                                                       showGutter: false,
+                                                       theme:'tomorrow_night_eighties',
+                                                       mode: 'javascript',
+                                                       onLoad: queryEditorLoaded,
+                                                       require: ['ace/ext/language_tools'],
+                                                       advanced: {
+                                                           enableSnippets: true,
+                                                           enableBasicAutocompletion: true,
+                                                           enableLiveAutocompletion: true
+                                                       },
+                                                     }"
+                                                     ng-model="active_tab.code" class=editor></div>
+                                                <div class=float>
+                                                    <!-- <button class="positive">Run Query</button> -->
+                                                    <button ng-click="reset_example_code()" class="danger" ng-class="{hidden: active_tab.code == active_tab.sample_code}">Undo Changes</button>
+                                                </div>
+                                            </div>
+
+                                            <div class=result>
+                                                <span class='spinner' ng-show="isNetPending()">
+                                                    <i class="fa fa-spinner icon-myspin"></i>
+                                                    Processing...
+                                                </span>
+                                                <table class="latencycontainer" ng-hide="isNetPending()">
+                                                    <tr class="entities">
+                                                        <td>Entities found</td>
+                                                        <td>:</td>
+                                                        <td>{{latency_data.entity_count}}</td>
+                                                    </tr>
+                                                    <tr class="total">
+                                                        <td>Server latency</td>
+                                                        <td>:</td>
+                                                        <td>{{ latency_data.total }}</td>
+                                                    </tr>
+                                                    <!-- <tr>
+                                                        <td class="parsing">parsing</td>
+                                                        <td>{{ latency_data.parsing }}</td>
+                                                    </tr><!-- -->
+                                                    <tr>
+                                                        <td class="processing">Processing</td>
+                                                        <td>:</td>
+                                                        <td>{{latency_data.processing}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="jsongen">JSON Conversion</td>
+                                                        <td>:</td>
+                                                        <td>{{latency_data.json}}</td>
+                                                    </tr>
+                                                </table>
+                                                <div class="tabcontainer">
+                                                    <h2 class="resulttab"
+                                                        ng-class="{active: result_json}"
+                                                        ng-click="result_json=true">
+                                                        json
+                                                    </h2>
+                                                    <h2 class="resulttab"
+                                                        ng-class="{active:!result_json}"
+                                                        ng-click="result_json=false">
+                                                        tree
+                                                    </h2>
+                                                </div>
+                                                <div ui-ace="{
+                                                        useWrapMode : true,
+                                                        showGutter: false,
+                                                        theme:'tomorrow_night_eighties',
+                                                        mode: 'javascript',
+                                                     }"
+                                                     ng-model="json_result"
+                                                     ng-show="result_json"
+                                                     class=editor></div>
+                                                <div class="tree" ng-if="!result_json">
+                                                    <tree obj="query_result" expanded="true"></tree>
+                                                    <div ng-if="!query_result">query result is not available</div>
+                                                </div>
+                                                <div ng-if="had_network_error" style="color:#f2777a">Error talking to server</div>
+                                            </div>
 
 
+                                            <script type="text/ng-template" id="tree_node.html">
+                                                <div ng-if="obj" class="treenode">
+                                                    <div class="title" ng-click="expanded=!expanded">
+                                                        {{summary.title}}
+                                                    </div>
+                                                    <div ng-if="expanded" ng-repeat="field in fields" class="field">
+                                                        <div class="key">{{field.key}}</div>
+                                                        <div class="atomvalue"> {{field.value}}</div>
+                                                        <div class="objvalue">
+                                                            <tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
+                                                            <div ng-if="field.array">
+                                                                <div class="arraysummary"
+                                                                     ng-if="!field.expanded"
+                                                                     ng-click="field.expanded=true">
+                                                                    <i class="fa fa-plus-circle"></i>
+                                                                    {{field.array.length}} item{{field.array.length!=1?'s':''}}
+                                                                </div>
+                                                                <div ng-if="field.expanded">
+                                                                    <div class="arrayoutline" ng-click="field.expanded=false">
+                                                                        <i class="fa fa-minus-circle"></i>
+                                                                        {{field.array.length}} item{{field.array.length!=1?'s':''}}
+                                                                    </div>
+                                                                    <table>
+                                                                        <tr ng-repeat="el in field.array track by el._uid_">
+                                                                            <td>{{$index}}&nbsp;</td>
+                                                                            <td>
+                                                                                <tree
+                                                                                      ng-class-odd='"odd"'
+                                                                                      obj="el"
+                                                                                      expanded="false"></tree>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </script>
+                                        </div> <!-- /codepen -->
 
-  <div class="codepen">
+                                        <div class="buttonrow animate from-bottom">
+                                            <a href="#boxes" class="btn btn-framed btn-light btn-default btn-xl roll">View More</a>
+                                        </div>
 
-    <ul class=querytabs>
-      <li ng-repeat='tab in examples' ng-click='activate($index)' class="{{tab.active ? 'active' : ''}}">
-        <button ng-click='activate($index)'>{{ tab.title}}</button>
-      </li>
-    </ul>
 
-    <div class=query>
-      <h2>graphql query</h2>
-      <div ui-ace="{
-              useWrapMode : true,
-              showGutter: false,
-              theme:'tomorrow_night_eighties',
-              mode: 'javascript',
-            }"
-           ng-model="active_tab.code" class=editor></div>
-      <div class=float>
-        <!-- <button class="positive">Run Query</button> -->
-        <button ng-click="reset_example_code()" class="danger" ng-class="{hidden: active_tab.code == active_tab.sample_code}">Undo Changes</button>
-      </div>
-    </div>
+                                        <!--/ .animate-->
+                                    </div>
+                                    <!--/ .block-content-->
+                                </div>
+                                <!--/ .block-->
+                            </div>
+                            <!--/ .col-md-8-->
+                            <div class="col-md-4" style="width:0">
+                                <div class="block">
+                                    <div class="image animate from-bottom">
+                                        <img src="assets/img/hero-img-app-phone.png" alt="">
+                                    </div>
+                                </div> <!-- -->
+                                <!--/ .block-->
+                            </div>
+                            <!--/ .col-md-4-->
+                        </div>
+                        <!--/ .row-->
+                    </div>
+                    <!--/ .container-->
+                </div>
+                <!--/ .heading-->
+            </div>
+            <!--/ .inner-->
+        </div>
+        <!--/ .heading-wrapper-->
+        <div class="carousel-hero-slider-wrapper">
+            <div class="owl-carousel carousel-hero-slider">
+                <div class="image">
+                    <img src="assets/img/hero-img-app.jpg" alt="">
+                </div>
+                <div class="image">
+                    <img src="assets/img/hero-img-app.jpg" alt="">
+                </div>
+            </div>
+            <!--/ .carousel-hero-slider-->
+        </div>
+        <!--/ .carousel-hero-slider-wrapper-->
+    </section>
+    <!--/ .hero-slider-->
 
-    <div class=result>
-      <h2 class="resulttab">result</h2>
-      <div  ui-ace="{
-            useWrapMode : true,
-            showGutter: false,
-            theme:'tomorrow_night_eighties',
-            mode: 'javascript',
-          }"
-          ng-model="json_result"
-          class=editor></div>
-    </div>
+    <section class="block-wrapper" id="boxes">
+        <div class="container">
+            <div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
+                <div class="block-content">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="box-icon">
+                                <i class="icon_clock_alt"></i>
+                                <h3>Low Latency, High Throughput</h3>
+                                <p>
+                                    Written in Go - the best language in the world (according to people who like that language).
+                                    DGraph uses multiple CPU cores, channels, caching, big-O analysis, variables, branches, loops and bytes to achieve ultimate performance.
+                                </p>
+                            </div>
+                            <!--/ .box-icon-->
+                        </div>
+                        <!--/ .col-md-4 col-sm-4-->
+                        <div class="col-md-4 col-sm-4">
+                            <div class="box-icon">
+                                <i class="icon_flowchart"></i>
+                                <h3>Distributed and Scalable</h3>
+                                <p>
+                                    Easily scale to multiple machines, datacenters, regions and planets. Telepathic replication and time travel will be committed to Github in June 2013.
+                                </p>
+                            </div>
+                            <!--/ .box-icon-->
+                        </div>
+                        <!--/ .col-md-4 col-sm-4-->
+                        <div class="col-md-4 col-sm-4">
+                            <div class="box-icon">
+                                <i class="icon_lightbulb_alt"></i>
+                                <h3>Open Source</h3>
+                                <p>
+                                    "I like my relationship like I like my source - open!" -- Manish Jain (never said that)
+                                </p>
+                            </div>
+                            <!--/ .box-icon-->
+                        </div>
+                        <!--/ .col-md-4 col-sm-4-->
+                    </div>
+                    <!--/ .row-->
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
 
-  </div>
+    <section class="block-wrapper" id="features">
+        <div class="container">
+            <div class="block bg-light bg-expand-both no-bottom-padding">
+                <div class="block-content">
+                    <h2 class="center">Check Out These Great Features</h2>
+                    <div class="presentation">
+                        <div class="description text-align-right">
+                            <figure>
+                                <i class="icon_clock_alt text-color-dark"></i>
+                                <h3 class="text-color-default">Push Notifications</h3>
+                                <hr>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
+                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                </p>
+                            </figure>
+                            <figure>
+                                <i class="icon_camera_alt text-color-dark"></i>
+                                <h3 class="text-color-default">Flat Design</h3>
+                                <hr>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
+                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                </p>
+                            </figure>
+                        </div>
+                        <!--/ .description-->
+                        <div class="image">
+                            <div class="center">
+                                <img src="assets/img/app-phone-single.png" alt="">
+                            </div>
+                            <!--/ .center-->
+                        </div>
+                        <!--/ .image-->
+                        <div class="description">
+                            <figure>
+                                <i class="icon_clock_alt text-color-dark"></i>
+                                <h3 class="text-color-default">Secure Cloud Data</h3>
+                                <hr>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
+                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                </p>
+                            </figure>
+                            <figure>
+                                <i class="icon_camera_alt text-color-dark"></i>
+                                <h3 class="text-color-default">Flat Design</h3>
+                                <hr>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla,
+                                    libero in porta pharetra, massa libero luctus mi, vitae aliquam
+                                </p>
+                            </figure>
+                        </div>
+                        <!--/ .description-->
+                    </div>
+                    <!--/ .presentation-->
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
-  <script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
-  <script src="app.js"></script>
+    <section class="block-wrapper" id="gallery">
+        <div class="container">
+            <div class="block">
+                <div class="block-content">
+                    <h2>Application Gallery</h2>
+                    <div class="owl-carousel carousel-gallery">
+                        <div class="image">
+                            <a href="#"><img src="assets/img/app-screen-1.jpg" alt=""></a>
+                        </div>
+                        <!--/ .image-->
+                        <div class="image">
+                            <a href="#"><img src="assets/img/app-screen-2.jpg" alt=""></a>
+                        </div>
+                        <!--/ .image-->
+                        <div class="image">
+                            <a href="#"><img src="assets/img/app-screen-3.jpg" alt=""></a>
+                        </div>
+                        <!--/ .image-->
+                        <div class="image">
+                            <a href="#"><img src="assets/img/app-screen-4.jpg" alt=""></a>
+                        </div>
+                        <!--/ .image-->
+                        <div class="image">
+                            <a href="#"><img src="assets/img/app-screen-5.jpg" alt=""></a>
+                        </div>
+                        <!--/ .image-->
+                    </div>
+                    <!--/ .gallery-carousel-->
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
 
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+    <section class="block-wrapper" id="download">
+        <div class="container">
+            <div class="block bg-default bg-expand-right">
+                <div class="block-content">
+                    <div class="center">
+                        <h2 class="center">Download Application</h2>
+                        <a href="#" class="btn btn-framed btn-light btn-default btn-xl">Apple Appstore</a>
+                        <a href="#" class="btn btn-framed btn-light btn-default btn-xl">Google Play</a>
+                    </div>
+                    <div class="bg">
+                        <img src="assets/img/app-background-icon.png" alt="">
+                    </div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <section class="block-wrapper">
+        <div class="container">
+            <div class="block">
+                <div class="block-content">
+                    <h2>Our Team</h2>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3">
+                            <div class="person">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="assets/img/person-1.jpg" alt="">
+                                    </a>
+                                </div>
+                                <h3>Catherine Brown</h3>
+                                <hr>
+                                <aside>Company CEO</aside>
+                            </div>
+                            <!--/ .person-->
+                        </div>
+                        <!--/ .col-md-3 col-sm-3-->
+                        <div class="col-md-3 col-sm-3">
+                            <div class="person">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="assets/img/person-2.jpg" alt="">
+                                    </a>
+                                </div>
+                                <h3>Mellanie Pearl</h3>
+                                <hr>
+                                <aside>UI/UX Designer</aside>
+                            </div>
+                            <!--/ .person-->
+                        </div>
+                        <!--/ .col-md-3 col-sm-3-->
+                        <div class="col-md-3 col-sm-3">
+                            <div class="person">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="assets/img/person-3.jpg" alt="">
+                                    </a>
+                                </div>
+                                <h3>John Doe</h3>
+                                <hr>
+                                <aside>iOS Developer</aside>
+                            </div>
+                            <!--/ .person-->
+                        </div>
+                        <!--/ .col-md-3 col-sm-3-->
+                        <div class="col-md-3 col-sm-3">
+                            <div class="person">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="assets/img/person-4.jpg" alt="">
+                                    </a>
+                                </div>
+                                <h3>Mellanie Pearl</h3>
+                                <hr>
+                                <aside>Android Developer</aside>
+                            </div>
+                            <!--/ .person-->
+                        </div>
+                        <!--/ .col-md-3 col-sm-3-->
+                    </div>
+                    <!--/ .row-->
+                    <div class="bg">
+                        <img src="assets/img/app-background-icon.png" alt="">
+                    </div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <section class="block-wrapper">
+        <div class="container">
+            <div class="block bg-light bg-expand-both half-margin">
+                <div class="block-content">
+                    <div class="row">
+                        <div class="numbers">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="number">
+                                    <figure data-from="1" data-to="262">262</figure>
+                                    <aside>Customers</aside>
+                                    <div class="separator"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="number">
+                                    <figure data-from="1" data-to="120">120</figure>
+                                    <aside>Team Members</aside>
+                                    <div class="separator"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="number">
+                                    <figure data-from="1" data-to="860">860</figure>
+                                    <aside>Hours Spent</aside>
+                                    <div class="separator"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <div class="number">
+                                    <figure data-from="1" data-to="360">360</figure>
+                                    <aside>Cups of Coffee</aside>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <section class="block-wrapper">
+        <div class="container">
+            <div class="block bg-dark bg-opacity-80 bg-expand-left half-margin">
+                <div class="block-content">
+                    <div class="vertical-aligned-elements">
+                        <div class="element">
+                            <h2 class="center no-margin">Be notified about the hot updates!</h2>
+                        </div>
+                        <div class="element">
+                            <form role="form" method="post"  id="form-subscribe">
+                                <div class="input-group large">
+                                    <input type="email" class="form-control" placeholder="Your E-mail" required="" name="subscription">
+                                    <span class="input-group-btn"><button class="btn btn-primary" type="submit">Subscribe</button></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <section class="block-wrapper">
+        <div class="container">
+            <div class="block">
+                <div class="block-content">
+                    <h2>Our Partners</h2>
+                    <div class="logos">
+                        <div class="logo">
+                            <img src="assets/img/logo-1.png" alt="">
+                        </div>
+                        <!--/ .logo-->
+                        <div class="logo">
+                            <img src="assets/img/logo-2.png" alt="">
+                        </div>
+                        <!--/ .logo-->
+                        <div class="logo">
+                            <img src="assets/img/logo-3.png" alt="">
+                        </div>
+                        <!--/ .logo-->
+                        <div class="logo">
+                            <img src="assets/img/logo-4.png" alt="">
+                        </div>
+                        <!--/ .logo-->
+                        <div class="logo">
+                            <img src="assets/img/logo-5.png" alt="">
+                        </div>
+                        <!--/ .logo-->
+                    </div>
+                    <!--/ .logos-->
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <section class="block-wrapper" id="contact">
+        <div class="container">
+            <div class="block">
+                <div class="block-content">
+                    <h2>Contact Us</h2>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <div class="contact-detail">
+                                <address>
+                                    <strong>Anthony T. Rogers</strong><br>
+                                    2995 Haven Lane<br>
+                                    Lansing, MI 48933<br>
+                                    <br>
+                                    <figure>
+                                        <div class="info">
+                                            <i class="icon_phone"></i>
+                                            <span>734-593-3512</span>
+                                        </div>
+                                        <div class="info">
+                                            <i class="icon_mail"></i>
+                                            <span><a href="mailto:hello@example.com?subject=Hello">hello@example.com</a></span>
+                                        </div>
+                                        <div class="info">
+                                            <i class="icon_globe-2 "></i>
+                                            <a href="#">www.example.com</a>
+                                        </div>
+                                    </figure>
+                                </address>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus pretium,
+                                    interdum odio non, eleifend quam. In accumsan, augue ut interdum egestas,
+                                    nisi diam porta ante
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <form role="form" id="form-contact" method="post"  class="clearfix">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="form-contact-name" name="form-contact-name" placeholder="Your Name" required>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.col-md-6 col-sm-6 -->
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="form-contact-email" name="form-contact-email" placeholder="Your Email" required>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.col-md-6 col-sm-6 -->
+                                </div><!-- /.row -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="form-contact-message" rows="6" name="form-contact-message" placeholder="Your Message" required></textarea>
+                                        </div><!-- /.form-group -->
+                                    </div><!-- /.col-md-12 -->
+                                </div><!-- /.row -->
+                                <div class="form-group clearfix">
+                                    <button type="submit" class="btn pull-right btn-primary" id="form-contact-submit">Send a Message</button>
+                                </div><!-- /.form-group -->
+                                <div id="form-status"></div>
+                            </form><!-- /#form-contact -->
+                        </div>
+                    </div>
+                    <div class="bg"></div>
+                    <!--/ .bg-->
+                </div>
+                <!--/ .block-content-->
+            </div>
+            <!--/ .block-->
+        </div>
+        <!--/ .container-->
+    </section>
+    <!--/ .block-wrapper-->
+
+    <footer>
+        <section class="block-wrapper">
+            <div class="container">
+                <div class="block bg-dark bg-opacity-80 bg-expand-both">
+                    <div class="block-content">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5">
+                                <h2>About Us</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus pretium,
+                                    interdum odio non, eleifend quam. In accumsan, augue ut interdum egestas, nisi diam porta
+                                    ante, in pellentesque quam eros nec odio. Phasellus nec justo dolor. Vestibulum id purus
+                                    molestie, faucibus lectus vel, aliquet lacus.
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <h2>Contact</h2>
+                                <address>
+                                    <strong>Anthony T. Rogers</strong><br>
+                                    2995 Haven Lane<br>
+                                    Lansing, MI 48933<br>
+                                    <br>
+                                    <figure>
+                                        <div class="info">
+                                            <i class="icon_phone"></i>
+                                            <span>734-593-3512</span>
+                                        </div>
+                                        <div class="info">
+                                            <i class="icon_mail"></i>
+                                            <span><a href="mailto:hello@example.com?subject=Hello">hello@example.com</a></span>
+                                        </div>
+                                        <div class="info">
+                                            <i class="icon_globe-2 "></i>
+                                            <a href="#">www.example.com</a>
+                                        </div>
+                                    </figure>
+                                </address>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <h2>Recent Tweets</h2>
+                                <div class="tweet">
+                                    <i class="social_twitter"></i>
+                                    <figure>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fringilla, libero in
+                                            porta pharetra, massa libero luctus mi, vitae
+                                        </p>
+                                        <aside>2014/05/09</aside>
+                                    </figure>
+                                </div>
+                                <!--/ .tweet-->
+                                <div class="tweet">
+                                    <i class="social_twitter"></i>
+                                    <figure>
+                                        <p>Phasellus nec justo dolor. Vestibulum id purus molestie, faucibus lectus vel, aliquet
+                                        </p>
+                                        <aside>2014/05/09</aside>
+                                    </figure>
+                                </div>
+                                <!--/ .tweet-->
+                            </div>
+                            <!--/ .col-md-4 col-sm-4-->
+                        </div>
+                        <!--/ .row-->
+                        <div class="bg"></div>
+                        <!--/ .bg-->
+                    </div>
+                    <!--/ .block-content-->
+                </div>
+                <!--/ .block-->
+            </div>
+            <!--/ .container-->
+        </section>
+        <section class="block-wrapper">
+            <div class="container">
+                <div class="block bg-default bg-expand-right half-margin copyright">
+                    <div class="block-content">
+                        <span>(C) 2014 ThemeStarz</span>
+                        <a href="#" class="pull-right">Top</a>
+                        <div class="bg"></div>
+                        <!--/ .bg-->
+                    </div>
+                    <!--/ .block-content-->
+                </div>
+                <!--/ .block-->
+            </div>
+            <!--/ .container-->
+        </section>
+        <!--/ .block-wrapper-->
+    </footer>
+    <!--/ .block-wrapper-->
+
+</div>
+
+<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
+<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ext-language_tools.js"></script>
+<script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
+<script src="app.js"></script>
+
+<script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.appear.js"></script>
+<script type="text/javascript" src="assets/js/readmore.min.js"></script>
+<script type="text/javascript" src="assets/js/pace.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+
+<script type="text/javascript" src="assets/js/custom.js"></script>
+
 </body>
-</html>
