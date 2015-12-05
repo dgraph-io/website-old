@@ -180,6 +180,22 @@
   margin-top: 8px;
   text-align: center;
 }
+.bg-light .buttonrow a.btn.btn-framed {
+  color: #000;
+  border-color: #000;
+  box-shadow: #000 0px 0px 0px 2px inset;
+}
+.bg-light .buttonrow a.btn.btn-framed i.fa {
+  font-size: 2em;
+}
+.bg-light .buttonrow a.btn.btn-framed img.img-icon {
+  height: 28px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+#features .buttonrow {
+  margin-bottom: 100px;
+}
 .icon-myspin {
   display: inline-block;
   animation: eightsteps 1s steps(1) infinite;
