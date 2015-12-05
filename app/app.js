@@ -14,44 +14,66 @@ angular.module('darthGraph', ['ui.ace']).
 
         $scope.examples = [
             {
-                title: 'Entity Properties',
+                title: 'Steven Spielberg',
                 sample_code: "" +
-"{\n" +
-"    me(_xid_: m.06pj8) {\n" +
-"        type.object.name.en\n" +
-"        film.director.film {\n" +
-"            type.object.name.en\n" +
-"            film.film.starring {\n" +
-"                film.performance.actor {\n" +
-"                    film.director.film {\n" +
-"                        type.object.name.en\n" +
-"                    }\n" +
-"                    type.object.name.en\n" +
-"                }\n" +
-"                film.performance.character {\n" +
-"                    type.object.name.en\n" +
-"                }\n" +
-"            }\n" +
-"            film.film.initial_release_date\n" +
-"            film.film.country\n" +
-"            film.film.genre {\n" +
-"                type.object.name.en\n" +
-"            }\n" +
-"        }\n" +
-"}\n"
+									"{\n" +
+									"  me(_xid_: m.06pj8) {\n" +
+									"    type.object.name.en\n" +
+									"    film.director.film {\n" +
+									"      type.object.name.en\n" +
+									"      film.film.initial_release_date\n" +
+									"      film.film.country\n" +
+									"      film.film.starring {\n" +
+									"        film.performance.actor {\n" +
+									"          film.director.film {\n" +
+									"            type.object.name.en\n" +
+									"          }\n" +
+									"          type.object.name.en\n" +
+									"        }\n" +
+									"        film.performance.character {\n" +
+									"          type.object.name.en\n" +
+									"        }\n" +
+									"      }\n" +
+									"      film.film.genre {\n" +
+									"        type.object.name.en\n" +
+									"      }\n" +
+									"    }\n" +
+									"  }\n" +
+									"}\n"
             },
             {
-                title: 'Nested List',
-                sample_code: "me(_uid_: m.1234) {\n" +
-                "    {\n" +
-                "        foo\n" +
-                "        bar\n" +
-                "    }\n" +
-                "}"
+                title: 'Kevin Bacon',
+                sample_code: "" +
+									"{\n" + 
+									"  me(_xid_: m.04954) {\n" + 
+									"    type.object.name.en\n" +
+									"    film.actor.film {\n" + 
+									"      film.performance.film {\n" +
+									"        type.object.name.en
+									"        film.film.starring {\n" +
+									"          film.performance.actor {\n" +
+									"            type.object.name.en
+									"          }\n" +
+									"        }\n" +
+									"      }\n" +
+									"    }\n" +
+									"  }\n" +
+									"}\n" +
             },
             {
-                title: 'Pure Awesomeness',
-                sample_code: "me(_uid_: m.1234) {\n    foo\n    bar\n}",
+                title: 'Tom Hanks',
+								sample_code: "" +
+									"{\n" +
+									"  me(_xid_: m.0bxtg) {\n" + 
+									"    type.object.name.en\n" +
+									"    film.actor.film {\n" +
+									"      film.performance.film {\n" +
+									"        type.object.name.en\n" +
+									"        type.object.name.fr\n" +
+									"      }\n" +
+									"    }\n" +
+									"  }\n" +
+									"}\n"
             },
         ];
 
