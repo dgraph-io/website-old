@@ -184,6 +184,7 @@
   color: #000;
   border-color: #000;
   box-shadow: #000 0px 0px 0px 2px inset;
+  margin-left: 30px;
 }
 .bg-light .buttonrow a.btn.btn-framed i.fa {
   font-size: 2em;
