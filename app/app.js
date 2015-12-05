@@ -49,16 +49,16 @@ angular.module('darthGraph', ['ui.ace']).
 									"    type.object.name.en\n" +
 									"    film.actor.film {\n" + 
 									"      film.performance.film {\n" +
-									"        type.object.name.en
+									"        type.object.name.en\n" +
 									"        film.film.starring {\n" +
 									"          film.performance.actor {\n" +
-									"            type.object.name.en
+									"            type.object.name.en\n" +
 									"          }\n" +
 									"        }\n" +
 									"      }\n" +
 									"    }\n" +
 									"  }\n" +
-									"}\n" +
+									"}\n"
             },
             {
                 title: 'Tom Hanks',
@@ -69,7 +69,7 @@ angular.module('darthGraph', ['ui.ace']).
 									"    film.actor.film {\n" +
 									"      film.performance.film {\n" +
 									"        type.object.name.en\n" +
-									"        type.object.name.fr\n" +
+									"        type.object.name.ru\n" +
 									"      }\n" +
 									"    }\n" +
 									"  }\n" +
