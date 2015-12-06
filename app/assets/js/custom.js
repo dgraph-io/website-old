@@ -19,7 +19,6 @@ $(document).ready(function($) {
 
     Pace.on('done', function() {
         body.addClass("loading-done");
-        setBlocksHeight();
         $.each( $(".hero-slider .animate"), function (i) {
             var $this = $(this);
             $this.addClass("idle");
@@ -107,46 +106,6 @@ $(window).on('resize', function(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function carouselPresentationWidth(){
-    if( $carouselPresentation.length ){
-        $carouselPresentation.width( $(window).width() - ( $carouselPresentation.offset().left +  $carouselPresentation.outerWidth()) );
-        $carouselPresentationImage.owlCarousel({
-            items: 1,
-            autoHeight: true,
-            mouseDrag: false
-        });
-
-        $carouselPresentationImage.on('translated.owl.carousel', function(event) {
-            var $this = $(this);
-            setTimeout(function() {
-                $this.closest(".block").height( $this.children().height() );
-            }, 300);
-        });
-    }
-}
-
-function setBlocksHeight(){
-
-    if ($(window).width() > 767) {
-        $(".block-wrapper").each(function () {
-            $(this).find(".block").css( "height", $(this).height() );
-        });
-    }
-    else {
-        $(".block-wrapper").each(function () {
-            //$(this).find(".block").css("height", "auto");
-        });
-    }
-
-    if ($(window).width() > 979) {
-        $(".heading-wrapper").each(function () {
-            $(this).find(".block").css( "height", $(this).find(".container").height() );
-        });
-    }
-    else {
-        $(".heading-wrapper").each(function () {
-            $(this).find(".block").css("height", "auto");
-        });
-    }
 }
 
 function initializeCounterUp(){
@@ -262,7 +221,6 @@ function centerSlider(){
         var ratio = imageWidth / imageHeight;
 
         var carouselHeroSlider = $('.carousel-hero-slider');
-        $(".carousel-hero-slider-wrapper").height( $(window).height() );
         $('.carousel-hero-slider .image').css('height', '');
         carouselHeroSlider.css('height', '');
 

@@ -119,6 +119,31 @@
 .codepen .result .latencycontainer td:last-child {
   text-align: right;
 }
+@media (max-width: 700px) {
+  .codepen {
+    flex-direction: column;
+  }
+  .codepen ul.querytabs {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+  }
+  .codepen ul.querytabs li {
+    width: auto;
+    height: auto;
+    text-align: center;
+    flex: 1;
+    float: left;
+    padding: 4px;
+  }
+  .codepen ul.querytabs li.active {
+    border-radius: 6px;
+  }
+  .codepen .query {
+    min-height: 30vh;
+    max-height: 30vh;
+  }
+}
 .codepen .tabcontainer {
   margin: 0 0 6px -2px;
   border-top: 1px dotted #444;
@@ -167,6 +192,20 @@
 .codepen .treenode [ng-click] {
   cursor: pointer;
 }
+.hero-slider.has-parallax .caption .block-content {
+  padding-top: 0;
+}
+.hero-slider.has-parallax .heading-wrapper {
+  height: auto;
+  min-height: 100vh;
+  position: static;
+}
+.hero-slider.has-parallax .heading-wrapper .inner {
+  min-height: 100vh;
+}
+.hero-slider.has-parallax .caption {
+  background-image: url(/assets/img/hero-img-app.jpg);
+}
 .caption-text h2:last-child {
   margin-bottom: 0;
 }
@@ -184,7 +223,7 @@
   color: #000;
   border-color: #000;
   box-shadow: #000 0px 0px 0px 2px inset;
-  margin-left: 30px;
+  margin: 10px 30px;
 }
 .bg-light .buttonrow a.btn.btn-framed i.fa {
   font-size: 2em;

@@ -135,6 +135,32 @@
     }
   }
 
+  @media (max-width: 700px) {
+    flex-direction: column;
+
+    ul.querytabs {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+    }
+    ul.querytabs li {
+      width: auto;
+      height: auto;
+      text-align: center;
+      flex: 1;
+      float: left;
+      padding: 4px;
+      &.active {
+        border-radius: 6px;
+      }
+    }
+
+    .query {
+      min-height: 30vh;
+      max-height: 30vh;
+    }
+  }
+
   .tabcontainer {
     margin: 0 0 6px -2px;
 
@@ -194,6 +220,27 @@
   }
 }
 
+.hero-slider.has-parallax {
+  .caption .block-content {
+    padding-top: 0;
+  }
+
+  .heading-wrapper {
+    height: auto;
+    min-height: 100vh;
+    position: static;
+
+    .inner {
+      min-height: 100vh;
+    }
+  }
+
+  .caption {
+    background-image: url(/assets/img/hero-img-app.jpg);
+  }
+}
+
+
 
 .caption-text {
   h2:last-child {
@@ -217,7 +264,8 @@
   color: #000;
   border-color: #000;
   box-shadow: #000 0px 0px 0px 2px inset;
-  margin-left: 30px;
+  margin: 10px 30px;
+
   i.fa {
     font-size: 2em;
   }
