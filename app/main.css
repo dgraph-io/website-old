@@ -225,6 +225,9 @@
   box-shadow: #000 0px 0px 0px 2px inset;
   margin: 10px 30px;
 }
+.bg-light .buttonrow a.btn.btn-framed:hover {
+  background-color: #eee;
+}
 .bg-light .buttonrow a.btn.btn-framed i.fa {
   font-size: 2em;
 }
