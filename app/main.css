@@ -143,6 +143,10 @@
     min-height: 30vh;
     max-height: 30vh;
   }
+  .codepen .result {
+    border-top: 1px dotted #444;
+    margin-top: 2px;
+  }
 }
 .codepen .tabcontainer {
   margin: 0 0 6px -2px;
