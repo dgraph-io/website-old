@@ -193,6 +193,9 @@
 .codepen .treenode .arrayoutline {
   color: #999;
 }
+.codepen .treenode .arraysummary:hover {
+  text-decoration: underline;
+}
 .codepen .treenode [ng-click] {
   cursor: pointer;
 }
@@ -218,6 +221,10 @@
 }
 .caption-text h2 {
   font-weight: 100;
+}
+.caption-text.bg-dark a:hover {
+  color: inherit;
+  text-decoration: underline;
 }
 .buttonrow {
   margin-top: 8px;

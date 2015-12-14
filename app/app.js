@@ -100,13 +100,91 @@ angular.module('darthGraph', ['ui.ace']).
 
         $scope.isNetPending = function() {
             return $scope.lastSentVersion != $scope.lastReceivedVersion;
-        }
+        };
+
+        $scope.queryEditorLoaded = function(editor) {
+            var dgraphCompleter = {
+                getCompletions: function(editor, session, pos, prefix, callback) {
+                    console.log('get completions ', arguments);
+
+                    var ret = [];
+                    for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
+                        var p = window.DGraph_All_Predicates[i];
+                        ret.push({
+                            name: '',
+                            value: p,
+                            score: 0,
+                            meta: 'dgraph movies',
+                        });
+                    }
+
+                    callback(null, ret);
+                }
+            };
+            editor.completers = [dgraphCompleter];
+            editor.session.setOptions({
+                mode: "ace/mode/javascript",
+                tabSize: 2,
+                useSoftTabs: true
+            });
+
+            window.setTimeout(function() {
+                //editor.session.bgTokenizer.stop();
+            }, 1999);
+
+            window.setTimeout(function() {
+
+                function filter_all(pat) {
+                    var ret = "";
+                    for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
+                        var p = window.DGraph_All_Predicates[i];
+                        if (!p.startsWith(pat)) {
+                            continue;
+                        }
+                        if (ret.length) {
+                            ret += "|";
+                        }
+                        ret += p.replace(/\./g, '\\\.');
+                    }
+                    return ret;
+                }
+
+                // keyword - purple, object and meta
+                // string - green, film
+                // support.function - blue, director
+                // constant.language - orange, actor
+                // variable.language - red
+                var newRules = {
+                    start:[
+                        {
+                            token: "keyword",
+                            regex: filter_all("type.")
+                        },
+                        {
+                            token: "string",
+                            regex: filter_all("film.film.")
+                        },
+                        {
+                            token: "support.function",
+                            regex: filter_all("film.director.")
+                        },
+                        {
+                            token: "constant.language",
+                            regex: filter_all("film.")
+                        },
+                    ]
+                };
+                editor.session.$mode.$highlightRules.addRules(newRules, "");
+                delete editor.session.$mode.$tokenizer;
+                editor.session.bgTokenizer.stop();
+                editor.session.bgTokenizer.setTokenizer(editor.session.$mode.getTokenizer());
+            }, 2000);
+        };
 
         $scope.runQuery = function(query) {
             var startTime = Date.now();
             $scope.lastSentVersion = $scope.lastSentVersion || 0;
             var currentCodeVersion = ++$scope.lastSentVersion;
-            console.log('start', currentCodeVersion, $scope.lastSentVersion);
             $http({
                 url: 'http://dgraph.xyz/query',
                 method: 'POST',
@@ -163,7 +241,6 @@ angular.module('darthGraph')
 
                     scope.$on('force_expand', function() {
                         scope.expanded = true;
-                        console.log('expanding ', scope.obj);
                         for (var i = 0; i < scope.fields.length; i++) {
                             scope.fields[i].expanded = true;
                         }
