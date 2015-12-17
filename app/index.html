@@ -60,6 +60,14 @@
 
                                             <div class=query>
                                                 <h2>graphql query</h2>
+                                                <div class="root-id">
+                                                    me:
+                                                    <input type="text"
+                                                           ng-model="typeahead_root_id"
+                                                           typeahead="x.name for x in typeahead_cache | filter:$viewValue | limitTo:8"
+                                                           typeahead-editable="false"
+                                                           />
+                                                </div>
                                                 <div ui-ace="{
                                                        useWrapMode : true,
                                                        showGutter: false,
@@ -300,6 +308,7 @@
 <!--<script src="bower_components/ace-builds/src/ext-language_tools.js"></script>-->
 
 <script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
 <script src="app.js"></script>
 <script src="typeahead.js"></script>
 
@@ -311,5 +320,7 @@
 <script type="text/javascript" src="/assets/js/jquery.countTo.js"></script>
 
 <script type="text/javascript" src="/assets/js/custom.js"></script>
+
+<link rel="stylesheet" href="bower_components/angular-ui/build/angular-ui.min.css">
 
 </body>

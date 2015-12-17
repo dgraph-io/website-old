@@ -1,7 +1,7 @@
 'use strict';
 
 // I am Darth Graph! join the dark side of the source.
-angular.module('darthGraph', ['ui.ace']).
+angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
     controller('GraphMagic', function($scope, $http) {
         var make_ace = function(element_id) {
             var editor = ace.edit(element_id);
@@ -181,6 +181,65 @@ angular.module('darthGraph', ['ui.ace']).
             }, 2000);
         };
 
+        // TODO: time to break this file into multiple independent components.
+        $scope.typeahead_cache = [];
+        $scope.typeahead_cache_indices = {};
+
+        $scope.found_entity = function(data) {
+            var index = $scope.typeahead_cache_indices[data.name];
+            if (index == undefined) {
+                $scope.typeahead_cache_indices[data.name] = $scope.typeahead_cache.length;
+                $scope.typeahead_cache.push(data);
+            } else {
+                var cached = $scope.typeahead_cache[index];
+                cached.xid = cached.xid || data.xid;
+                cached.uid = cached.uid || data.uid;
+            }
+        };
+        $scope.$watch("typeahead_root_id", function(newVal) {
+            if (!newVal) {
+                return;
+            }
+            var cached = $scope.typeahead_cache[ $scope.typeahead_cache_indices[newVal] ];
+            var newExpr = cached.xid ? "_xid_: " + cached.xid : "_uid_: " + cached.uid;
+            console.log(newExpr);
+            var newCode = $scope.active_tab.code.replace(/me\s*\([^()]+\)/, "me(" + newExpr + ")");
+            if (newCode == $scope.active_tab.code && newCode.indexOf(newExpr) < 0) {
+                alert('Your query must contain string "me(_xid_: <some id>) for autocomplete to work"');
+            }
+            $scope.active_tab.code = newCode;
+        });
+
+        $scope.cache_entities = function(obj) {
+
+            if (obj.hasOwnProperty("type.object.name.en") && obj.hasOwnProperty("_xid_")) {
+                $scope.found_entity({
+                    name: obj["type.object.name.en"],
+                    xid: obj["_xid_"]
+                });
+            }
+
+            if (obj.hasOwnProperty("type.object.name.en") && obj.hasOwnProperty("_uid_")) {
+                $scope.found_entity({
+                    name: obj["type.object.name.en"],
+                    uid: obj["_uid_"]
+                });
+            }
+
+            for (var k in obj) {
+                if (!obj.hasOwnProperty(k)) {
+                    continue;
+                }
+                if (obj[k] instanceof Array) {
+                    for (var i = 0; i < obj[k].length; i++) {
+                        $scope.cache_entities(obj[k][i]);
+                    }
+                } else if (obj[k] instanceof Object) {
+                    $scope.cache_entities(obj[k]);
+                }
+            }
+        };
+
         $scope.runQuery = function(query) {
             var startTime = Date.now();
             $scope.lastSentVersion = $scope.lastSentVersion || 0;
@@ -199,6 +258,8 @@ angular.module('darthGraph', ['ui.ace']).
 
                 $scope.query_result = response.data._root_&& response.data._root_[0];
                 $scope.json_result = JSON.stringify($scope.query_result, null, 2);
+
+                $scope.cache_entities($scope.query_result);
 
                 $scope.latency_data = response.data.server_latency || {};
                 $scope.latency_data.client_total_latency = Date.now() - startTime;
@@ -254,7 +315,7 @@ angular.module('darthGraph')
                     scope.get_fields = function(obj) {
                         var fields = [];
                         for (var k in obj) {
-                            if (fields.length > 10) {
+                            if (fields.length > 100) {
                                 break;
                             }
                             if (!obj.hasOwnProperty(k)) {
