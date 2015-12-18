@@ -202,23 +202,28 @@
     margin: 0 0 6px -2px;
 
     border-top: 1px dotted #444;
+    border-bottom: 1px solid #999;
     padding-top: 8px;
   }
   .resulttab {
     &.active {
-      background-color: #ccc;
-      color: #2d2d2d;
+      border-color: #999;
+      color: #999;
+      border-bottom: 1px solid #2d2d2d;
+      margin-bottom: -1px;
     }
-    border: 1px solid #999;
+    border: 1px solid #777;
     border-bottom: none;
+    color: #777;
     cursor: pointer;
+    display: block;
+    float: left;
     margin: 0 2px;
     width: 45px;
     text-align: center;
     border-radius: 4px 4px 0 0;
-    padding: 0 2px;
-    display: block;
-    float: left;
+    padding: 0 2px 1px;
+    transition: all 0.1s;
   }
 
   .treenode {
