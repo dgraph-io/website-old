@@ -3,14 +3,6 @@
 // I am Darth Graph! join the dark side of the source.
 angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
     controller('GraphMagic', function($scope, $http) {
-        var make_ace = function(element_id) {
-            var editor = ace.edit(element_id);
-            editor.setTheme("ace/theme/tomorrow_night_eighties");
-            editor.getSession().setMode("ace/mode/javascript");
-            editor.renderer.setShowGutter(false);
-            editor.$blockScrolling = Infinity;
-            return editor;
-        };
 
         $scope.examples = [
             {
@@ -103,6 +95,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
         };
 
         $scope.queryEditorLoaded = function(editor) {
+            editor.$blockScrolling = Infinity;
             var dgraphCompleter = {
                 getCompletions: function(editor, session, pos, prefix, callback) {
                     console.log('get completions ', arguments);
@@ -161,6 +154,10 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                             regex: filter_all("type.")
                         },
                         {
+                            token: "keyword",
+                            regex: "_[xu]id_"
+                        },
+                        {
                             token: "string",
                             regex: filter_all("film.film.")
                         },
@@ -196,6 +193,24 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 cached.uid = cached.uid || data.uid;
             }
         };
+
+        $scope.found_entity({
+            name: "Steven Spielberg",
+            xid: "m.06pj8",
+            uid: "0x3b0de646eaf32b75",
+        });
+        $scope.found_entity({
+            name: "Kevin Bacon",
+            xid: "m.04954",
+            uid: "0xbb802f2f5e994768",
+        });
+        $scope.found_entity({
+            name: "Tom Hanks",
+            xid: "m.0bxtg",
+            uid: "0xcbcefccffb9eb400",
+        });
+
+
         $scope.$watch("typeahead_root_id", function(newVal) {
             if (!newVal) {
                 return;
@@ -209,6 +224,33 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
             }
             $scope.active_tab.code = newCode;
         });
+
+        $scope.$watch("active_tab.code", function(newCode) {
+            if (!newCode) {
+                return;
+            }
+            var newXID = newCode.match(/me\s*\(\s*_xid_\s*:\s*([^\s]*)\s*\)/);
+            if (newXID && newXID[1]) {
+                $scope.entity_selected("xid", newXID[1]);
+                return;
+            }
+
+            var newUID = newCode.match(/me\s*\(\s*_uid_\s*:\s*([^\s]*)\s*\)/);
+            if (newUID && newUID[1]) {
+                $scope.entity_selected("uid", newUID[1]);
+                return;
+            }
+        });
+
+        $scope.entity_selected = function(field, value) {
+            for (var i = 0; i < $scope.typeahead_cache.length; i++) {
+                if ($scope.typeahead_cache[i][field] == value) {
+                    $scope.typeahead_root_id = $scope.typeahead_cache[i].name;
+                    return;
+                }
+            }
+            $scope.typeahead_root_id = undefined;
+        };
 
         $scope.cache_entities = function(obj) {
 
@@ -373,3 +415,17 @@ angular.module('darthGraph')
             }
         };
     });
+
+angular.module('darthGraph').directive('selectOnClick', ['$window', function ($window) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.on('click', function () {
+                if (!$window.getSelection().toString()) {
+                    // Required for mobile Safari
+                    this.setSelectionRange(0, this.value.length)
+                }
+            });
+        }
+    };
+}]);
