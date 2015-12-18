@@ -2,6 +2,113 @@
  * Created by paul on 2/12/15.
  */
 
+define('ace/mode/graphql', [], function(require, exports, module) {
+
+    var oop = require("ace/lib/oop");
+    var TextMode = require("ace/mode/text").Mode;
+    var Tokenizer = require("ace/tokenizer").Tokenizer;
+    var GraphqlHighlightRules = require("ace/mode/graphql_highlight_rules").GraphqlHighlightRules;
+
+    var Mode = function() {
+        this.HighlightRules = GraphqlHighlightRules;
+
+    };
+    oop.inherits(Mode, TextMode);
+
+    exports.Mode = Mode;
+});
+
+define('ace/mode/graphql_highlight_rules', [], function(require, exports, module) {
+
+    var oop = require("ace/lib/oop");
+    var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
+
+    var GraphqlHighlightRules = function() {
+
+        var filter_all = function(pat) {
+            var ret = "";
+            for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
+                var p = window.DGraph_All_Predicates[i];
+                if (!p.startsWith(pat)) {
+                    continue;
+                }
+                if (ret.length) {
+                    ret += "|";
+                }
+                ret += p.replace(/\./g, '\\\.');
+            }
+            return ret;
+        };
+
+        var keywordMapper = this.createKeywordMapper({
+            "variable.language": "film[^\s]*",
+            "keyword":
+                "me|_xid_|_uid_",
+            "constant.language":
+                "type[^\s]*"
+        }, "text", true);
+
+        // keyword - purple, object and meta
+        // string - green, film
+        // support.function - blue, director
+        // constant.language - orange, actor
+        // variable.language - red
+        this.$rules = {
+            start:[
+                {
+                    token: "keyword",
+                    regex: filter_all("type.")
+                },
+                {
+                    token: "keyword",
+                    regex: "_[xu]id_|me"
+                },
+                {
+                    token: "string",
+                    regex: filter_all("film.film.")
+                },
+                {
+                    token: "support.function",
+                    regex: filter_all("film.director.")
+                },
+                {
+                    token: "constant.language",
+                    regex: filter_all("film.")
+                },
+            ]
+        };
+
+        this.normalizeRules();
+    };
+
+    oop.inherits(GraphqlHighlightRules, TextHighlightRules);
+
+    exports.GraphqlHighlightRules = GraphqlHighlightRules;
+});
+
+
+var langTools = ace.require("ace/ext/language_tools");
+
+
+var dgraphCompleter = {
+    getCompletions: function(editor, session, pos, prefix, callback) {
+        var ret = [];
+        for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
+            var p = window.DGraph_All_Predicates[i];
+            ret.push({
+                name: '',
+                value: p,
+                score: 0,
+                meta: 'dgraph movies',
+            });
+        }
+
+        callback(null, ret);
+    }
+};
+langTools.addCompleter(dgraphCompleter);
+
+
 window.DGraph_All_Predicates = [
     "film.actor.dubbing_performances",
     "film.actor.film",

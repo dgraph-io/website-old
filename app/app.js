@@ -96,86 +96,16 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
 
         $scope.queryEditorLoaded = function(editor) {
             editor.$blockScrolling = Infinity;
-            var dgraphCompleter = {
-                getCompletions: function(editor, session, pos, prefix, callback) {
-                    console.log('get completions ', arguments);
-
-                    var ret = [];
-                    for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
-                        var p = window.DGraph_All_Predicates[i];
-                        ret.push({
-                            name: '',
-                            value: p,
-                            score: 0,
-                            meta: 'dgraph movies',
-                        });
-                    }
-
-                    callback(null, ret);
-                }
-            };
-            editor.completers = [dgraphCompleter];
             editor.session.setOptions({
-                mode: "ace/mode/javascript",
+                mode: "ace/mode/graphql",
                 tabSize: 2,
                 useSoftTabs: true
             });
 
-            window.setTimeout(function() {
-                //editor.session.bgTokenizer.stop();
-            }, 1999);
-
-            window.setTimeout(function() {
-
-                function filter_all(pat) {
-                    var ret = "";
-                    for (var i = 0; i < window.DGraph_All_Predicates.length; i++) {
-                        var p = window.DGraph_All_Predicates[i];
-                        if (!p.startsWith(pat)) {
-                            continue;
-                        }
-                        if (ret.length) {
-                            ret += "|";
-                        }
-                        ret += p.replace(/\./g, '\\\.');
-                    }
-                    return ret;
-                }
-
-                // keyword - purple, object and meta
-                // string - green, film
-                // support.function - blue, director
-                // constant.language - orange, actor
-                // variable.language - red
-                var newRules = {
-                    start:[
-                        {
-                            token: "keyword",
-                            regex: filter_all("type.")
-                        },
-                        {
-                            token: "keyword",
-                            regex: "_[xu]id_"
-                        },
-                        {
-                            token: "string",
-                            regex: filter_all("film.film.")
-                        },
-                        {
-                            token: "support.function",
-                            regex: filter_all("film.director.")
-                        },
-                        {
-                            token: "constant.language",
-                            regex: filter_all("film.")
-                        },
-                    ]
-                };
-                editor.session.$mode.$highlightRules.addRules(newRules, "");
-                delete editor.session.$mode.$tokenizer;
-                editor.session.bgTokenizer.stop();
-                editor.session.bgTokenizer.setTokenizer(editor.session.$mode.getTokenizer());
-            }, 2000);
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true
+            });
         };
 
         // TODO: time to break this file into multiple independent components.
@@ -253,7 +183,9 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
         };
 
         $scope.cache_entities = function(obj) {
-
+            if (!obj) {
+                return;
+            }
             if (obj.hasOwnProperty("type.object.name.en") && obj.hasOwnProperty("_xid_")) {
                 $scope.found_entity({
                     name: obj["type.object.name.en"],
