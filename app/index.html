@@ -64,7 +64,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
                                                     me:
                                                     <input type="text"
                                                            ng-model="typeahead_root_id"
-                                                           typeahead="x.name for x in typeahead_cache | filter:$viewValue | limitTo:8"
+                                                           uib-typeahead="x.name for x in fetch_kg($viewValue)" huy="| filter:$viewValue | limitTo:10"
                                                            typeahead-editable="false"
                                                            select-on-click
                                                            />
@@ -312,7 +312,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
 <script type="text/javascript" src="/assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.appear.js"></script>
 <script type="text/javascript" src="/assets/js/readmore.min.js"></script>
-<script type="text/javascript" src="/assets/js/pace.min.js"></script>
+<script type="text/javascript" data-pace-options='{ "ajax": false }' src="/assets/js/pace.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.countTo.js"></script>
 
 <script type="text/javascript" src="/assets/js/custom.js"></script>

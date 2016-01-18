@@ -6,66 +6,66 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
 
         $scope.examples = [
             {
-                title: 'Steven Spielberg',
+                title: 'Film Director',
                 sample_code: "" +
-									"{\n" +
-									"  me(_xid_: m.06pj8) {\n" +
-									"    type.object.name.en\n" +
-									"    film.director.film {\n" +
-									"      type.object.name.en\n" +
-									"      film.film.initial_release_date\n" +
-									"      film.film.country\n" +
-									"      film.film.starring {\n" +
-									"        film.performance.actor {\n" +
-									"          film.director.film {\n" +
-									"            type.object.name.en\n" +
-									"          }\n" +
-									"          type.object.name.en\n" +
-									"        }\n" +
-									"        film.performance.character {\n" +
-									"          type.object.name.en\n" +
-									"        }\n" +
-									"      }\n" +
-									"      film.film.genre {\n" +
-									"        type.object.name.en\n" +
-									"      }\n" +
-									"    }\n" +
-									"  }\n" +
-									"}\n"
+                    "{\n" +
+                    "  me(_xid_: m.06pj8) {\n" +
+                    "    type.object.name.en\n" +
+                    "    film.director.film {\n" +
+                    "      type.object.name.en\n" +
+                    "      film.film.initial_release_date\n" +
+                    "      film.film.country\n" +
+                    "      film.film.starring {\n" +
+                    "        film.performance.actor {\n" +
+                    "          type.object.name.en\n" +
+                    "        }\n" +
+                    "        film.performance.character {\n" +
+                    "          type.object.name.en\n" +
+                    "        }\n" +
+                    "      }\n" +
+                    "      film.film.genre {\n" +
+                    "        type.object.name.en\n" +
+                    "      }\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}\n"
             },
             {
-                title: 'Kevin Bacon',
+                title: 'Actor',
                 sample_code: "" +
-									"{\n" + 
-									"  me(_xid_: m.04954) {\n" + 
-									"    type.object.name.en\n" +
-									"    film.actor.film {\n" + 
-									"      film.performance.film {\n" +
-									"        type.object.name.en\n" +
-									"        film.film.starring {\n" +
-									"          film.performance.actor {\n" +
-									"            type.object.name.en\n" +
-									"          }\n" +
-									"        }\n" +
-									"      }\n" +
-									"    }\n" +
-									"  }\n" +
-									"}\n"
+                    "{\n" +
+                    "  me(_xid_: m.0bxtg) {\n" +
+                    "    type.object.name.en\n" +
+                    "    film.actor.film {\n" +
+                    "      film.performance.film {\n" +
+                    "        type.object.name.en\n" +
+                    "        type.object.name.ru\n" +
+                    "      }\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}\n"
             },
             {
-                title: 'Tom Hanks',
-								sample_code: "" +
-									"{\n" +
-									"  me(_xid_: m.0bxtg) {\n" + 
-									"    type.object.name.en\n" +
-									"    film.actor.film {\n" +
-									"      film.performance.film {\n" +
-									"        type.object.name.en\n" +
-									"        type.object.name.ru\n" +
-									"      }\n" +
-									"    }\n" +
-									"  }\n" +
-									"}\n"
+                title: 'Movie',
+                sample_code: "" +
+                    "{\n" +
+                    "  me(_xid_: m.07bwr) {\n" +
+                    "    type.object.name.en\n" +
+                    "    film.film.initial_release_date\n" +
+                    "    film.film.country\n" +
+                    "    film.film.starring {\n" +
+                    "      film.performance.actor {\n" +
+                    "        type.object.name.en\n" +
+                    "      }\n" +
+                    "      film.performance.character {\n" +
+                    "        type.object.name.en\n" +
+                    "      }\n" +
+                    "    }\n" +
+                    "    film.film.genre {\n" +
+                    "      type.object.name.en\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}\n",
             },
         ];
 
@@ -124,36 +124,77 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
             }
         };
 
-        $scope.found_entity({
-            name: "Steven Spielberg",
-            xid: "m.06pj8",
-            uid: "0x3b0de646eaf32b75",
-        });
-        $scope.found_entity({
-            name: "Kevin Bacon",
-            xid: "m.04954",
-            uid: "0xbb802f2f5e994768",
-        });
-        $scope.found_entity({
-            name: "Tom Hanks",
-            xid: "m.0bxtg",
-            uid: "0xcbcefccffb9eb400",
-        });
-
+        $scope.flush_typeahead_cache = function() {
+            $scope.typeahead_cache = [];
+            $scope.typeahead_cache_indices = {};
+            $scope.found_entity({
+                name: "Steven Spielberg",
+                xid: "m.06pj8",
+                uid: "0x3b0de646eaf32b75",
+            });
+            $scope.found_entity({
+                name: "Tom Hanks",
+                xid: "m.0bxtg",
+                uid: "0xcbcefccffb9eb400",
+            });
+            $scope.found_entity({
+                name: "The Big Lebowski",
+                xid: "m.07bwr",
+                uid: "0xff4c6752867d137d",
+            });
+        };
+        $scope.flush_typeahead_cache();
 
         $scope.$watch("typeahead_root_id", function(newVal) {
             if (!newVal) {
                 return;
             }
             var cached = $scope.typeahead_cache[ $scope.typeahead_cache_indices[newVal] ];
+            if (!cached) {
+                return;
+            }
             var newExpr = cached.xid ? "_xid_: " + cached.xid : "_uid_: " + cached.uid;
-            console.log(newExpr);
             var newCode = $scope.active_tab.code.replace(/me\s*\([^()]+\)/, "me(" + newExpr + ")");
             if (newCode == $scope.active_tab.code && newCode.indexOf(newExpr) < 0) {
                 alert('Your query must contain string "me(_xid_: <some id>) for autocomplete to work"');
             }
             $scope.active_tab.code = newCode;
+
+            if ($scope.typeahead_cache.length > 1e5) {
+                // Cache is flushed after user has selected something in the typeahead.
+                $scope.flush_typeahead_cache();
+                $scope.found_entity(cached);
+            }
         });
+
+        var translate_kg_id = function(kgid) {
+            return kgid.substr("kg:/".length).replace('/', '.');
+        };
+
+        $scope.fetch_kg = function(query) {
+            return $http.get("https://kgsearch.googleapis.com/v1/entities:search", {
+                params: {
+                    key: "AIzaSyAiTPA51qB8hwBsbIt99Lwka0zo3z_0vQk",
+                    limit: 200,
+                    types: ["Person", "Movie"],
+                    query: query
+                }
+            }).then(function(response) {
+                if (!response.data || !response.data.itemListElement) {
+                    return [];
+                }
+                var res = [];
+                response.data.itemListElement.forEach(function(item) {
+                    var e = {
+                        name: item.result.name,
+                        xid: translate_kg_id(item.result['@id'])
+                    };
+                    $scope.found_entity(e);
+                    res.push(e);
+                });
+                return res;
+            });
+        };
 
         $scope.$watch("active_tab.code", function(newCode) {
             if (!newCode) {
