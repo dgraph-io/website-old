@@ -108,6 +108,10 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
             });
         };
 
+        $scope.responseEditorLoaded = function(editor) {
+            editor.$blockScrolling = Infinity;
+        };
+
         // TODO: time to break this file into multiple independent components.
         $scope.typeahead_cache = [];
         $scope.typeahead_cache_indices = {};
