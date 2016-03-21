@@ -259,6 +259,14 @@
   color: inherit;
   text-decoration: underline;
 }
+.main-title {
+  display: inline-block;
+}
+.github-button {
+  display: inline-block;
+  height: 44px;
+  padding-left: 20px;
+}
 .buttonrow {
   margin-top: 8px;
   text-align: center;
