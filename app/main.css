@@ -266,6 +266,7 @@
   display: inline-block;
   height: 44px;
   padding-left: 20px;
+  width: 200px;
 }
 .buttonrow {
   margin-top: 8px;
