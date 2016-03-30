@@ -264,7 +264,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
             $scope.lastSentVersion = $scope.lastSentVersion || 0;
             var currentCodeVersion = ++$scope.lastSentVersion;
             $http({
-                url: 'http://dgraph.xyz/query',
+                url: '/query',
                 method: 'POST',
                 data: query
             }).then(function(response) {
