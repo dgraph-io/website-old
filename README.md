@@ -7,7 +7,7 @@ Website code for dgraph.io. The best way to run this would be inside a docker co
 
   For OS X this would mean installing the Docker toolbox and running a docker machine.
 
-2. Modify Nginx configuration - Once you have docker running, you need to modify nginx.conf inside nginx folder to
+2. Modify Nginx configuration - Once you have docker running, you need to modify the `http` block in nginx/nginx.conf to
 
   ```
   http {
@@ -25,7 +25,7 @@ Website code for dgraph.io. The best way to run this would be inside a docker co
   }
   ```
 
-  This would make sure all your queries are reverse proxied to `http://dgraph.io` and your assets are served from within the data directory.
+  This would make sure all your queries are reverse proxied to `http://dgraph.io` and your assets are served from within the data directory. Don't modify the `events` key in this file.
 
 
 3. Run nginx via:
