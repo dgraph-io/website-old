@@ -263,14 +263,19 @@
   display: inline-block;
 }
 .main-title img {
-  width: 100px;
+  width: 90%;
+}
+@media (max-width: 768px) {
+  .main-title img {
+    width: 100px;
+  }
 }
 .github-button {
   display: inline-block;
   height: 44px;
   padding-left: 20px;
   width: 200px;
-  padding-top: 5px;
+  padding-top: 4px;
 }
 .buttonrow {
   margin-top: 8px;
