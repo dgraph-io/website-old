@@ -79,10 +79,17 @@ nav {
 #jobs .box-icon p {
   font-size: 14px;
 }
+#jobs .box-icon p a {
+  font-size: inherit;
+  font-weight: inherit;
+}
 #jobs .box-icon i {
   display: inline-block;
   width: 100%;
   text-align: center;
+}
+#footer .block-content {
+  padding: 20px;
 }
 .codepen {
   border: 1px solid #222;
