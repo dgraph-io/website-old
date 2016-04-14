@@ -1,5 +1,9 @@
+nav {
+  margin-top: 20px;
+  display: none;
+}
 #team .block-content {
-  padding-top: 20px;
+  padding: 20px;
 }
 #team h1 {
   margin-top: 20px;
@@ -8,6 +12,53 @@
 }
 #team img {
   height: 200px;
+}
+#team p {
+  font-size: 15px;
+}
+#team .social a {
+  width: 30px;
+  display: inline-block;
+  height: 30px;
+  background-color: #fff;
+  margin: 0 2px;
+  border-radius: 50%;
+  line-height: 30px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+#team .social .linkedin {
+  background-color: #287bbc;
+}
+#team .social i {
+  font-size: inherit;
+  margin-left: 8px;
+  top: -2px;
+}
+#team .social .fa-linkedin {
+  color: white;
+  margin-left: 9px;
+}
+#team .social .fa-twitter {
+  color: #3B94D9;
+  top: -1px;
+}
+#jobs .block-content {
+  padding: 20px 0px;
+}
+#jobs h4 {
+  margin-bottom: 40px;
+}
+#jobs h4 a {
+  font-weight: inherit;
+  font-size: inherit;
+}
+#jobs .box-icon p {
+  font-size: 14px;
+}
+#jobs .box-icon i {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 .codepen {
   border: 1px solid #222;
