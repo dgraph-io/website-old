@@ -300,6 +300,33 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
     </section>
     <!--/ .block-wrapper-->
 
+
+    <div class="modal" id="bio_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 pic">
+                <img src=""></img>
+              </div>
+              <div class="col-xs-12 col-sm-8 bio">
+                <div class="name"><h1></h1></div>
+                <div class="position"><h3></h3></div>
+                <div class="description"></div>
+                <div class="social">
+                    <a class="twitter" href="" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="linkedin" href="" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section class="block-wrapper" id="team">
         <div class="container">
             <div class="block bg-light bg-expand-both x-va-middle">
@@ -307,58 +334,52 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
                     <h1 class="center">The Team</h1>
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="box-icon">
+                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+                                <!-- <div class="box-icon"> -->
                                 <img src="assets/img/profile.jpeg">
                                 <h3>Manish Jain</h3>
+                                <h5>Founder & CEO</h5>
                                 <div class="social">
-                                    <a href="https://twitter.com/manishrjain" target="_blank">
-                                        <i class="fa fa-twitter"></i>
+                                    <a class="twitter" href="https://twitter.com/manishrjain">
                                     </a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/manishrjain" target="_blank">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
+                                    <a class="linkedin" href="https://www.linkedin.com/in/manishrjain"></a>
                                 </div>
-                                <p>Manish is the Chief decision maker at DGraph. He got thrust into distributed systems right out of college, working on real time web indexing system at Google. He then lead various projects to consolidate and serve knowledge graph right behind web search.<br>
+                                <p  class="desc">Manish is the Chief decision maker at DGraph. He got thrust into distributed systems right out of college, working on real time web indexing system at Google. He then lead various projects to consolidate and serve knowledge graph right behind web search.<br>
                                 Implementing GTD and Zero Waste practices, Manish is into efficient and minimalist living. He loves cycling, swimming and ultra light travelling.</p>
-                            </div>
+                                <!-- </div> -->
+                            </a>
                             <!--/ .box-icon-->
                         </div>
                         <!--/ .col-md-4 col-sm-4-->
                         <div class="col-sm-4">
-                            <div class="box-icon">
+                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
                                 <img src="assets/img/Prashanth_Photo.png">
                                 <h3>Prashant Koppula</h3>
+                                <h5>Co-Founder</h5>
                                 <div class="social">
-                                    <a href="https://twitter.com/koppula" target="_blank">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/prashanthrkoppula" target="_blank">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
+                                    <a class="twitter" href="https://twitter.com/koppula"></a>
+                                    <a class="linkedin" href="https://www.linkedin.com/in/prashanthrkoppula"></a>
                                 </div>
-                                <p>
+                                <p class="desc">
                                     Prashanth is responsible for all things operations and growth at DGraph. With a love for sustainable architecture, his dream is to build his very own zero energy home. Other interests include squash, traveling, and Lego.
                                 </p>
-                            </div>
+                            </a>
                             <!--/ .box-icon-->
                         </div>
                         <!--/ .col-md-4 col-sm-4-->
                         <div class="col-sm-4">
-                            <div class="box-icon">
-                                <img src="assets/img/photo.JPG">
+                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+                                <img src="assets/img/choki_e.jpg">
                                 <h3>Ashwin Ramesh</h3>
+                                <h5>Developer</h5>
                                 <div class="social">
-                                    <a href="https://twitter.com/ashwin_rrr" target="_blank">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/ashwin95r" target="_blank">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
+                                    <a class="twitter" href="https://twitter.com/ashwin_rrr"></a>
+                                    <a class="linkedin" href="https://www.linkedin.com/in/ashwin95r"></a>
                                 </div>
-                                <p>
+                                <p class="desc">
                                     Ashwin is a software engineer at DGraph. He likes working out, hiking, swimming and everything adventurous. Loves travelling to new places and trying out new food.
                                 </p>
-                            </div>
+                            </a>
                             <!--/ .box-icon-->
                         </div>
                         <!--/ .col-md-4 col-sm-4-->
@@ -400,7 +421,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
                         <div class="col-sm-3 col-xs-6">
                             <div class="box-icon">
                                 <i class="fa fa-desktop fa-5x" aria-hidden="true"></i>
-                                <p class="center">Powerful Workstation of your choice<p>
+                                <p class="center">Spend 2500 dollars on workstation and desk<p>
                             </div>
                         </div>
 
@@ -425,7 +446,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
                             <div class="box-icon">
                                 <i class="fa fa-futbol-o fa-5x" aria-hidden="true"></i>
                                 <p class="center">Gym Memberships<br>
-                                You sweat and we will pay for it<p>
+                                If you sweat,we'll pay for it<p>
                             </div>
                         </div>
 
@@ -446,7 +467,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
                         </div>
 
                     </div>
-                    <h4 class="center"> If this sounds interesting to you, get in touch with us <a href="mailto:join@dgraph.io">here</a></h4>
+                    <h4 class="center"> If this sounds interesting to you, <a href="mailto:join@dgraph.io">get in touch with us</a></h4>
                     <!--/ .row-->
                     <div class="bg"></div>
                     <!--/ .bg-->
@@ -462,19 +483,19 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
         <div class="container">
             <div class="block bg-light bg-expand-both no-bottom-padding">
                 <div class="block-content">
-                    <h2 class="center">Find out more</h2>
+                    <h2 class="center">DGraph is written entirely in Go and is Open Source. Find out more at</h2>
 
                     <div class="buttonrow animate idle from-bottom">
                         <a href="https://github.com/dgraph-io/dgraph"
                            class="btn btn-framed btn-light btn-default btn-xl roll">
                             <i class="fa fa-github text-color-dark"></i>
-                            View on Github
+                            Github
                         </a>
 
                         <a href="https://gitter.im/dgraph-io/dgraph"
                            class="btn btn-framed btn-light btn-default btn-xl roll">
                             <img class="img-icon" src="assets/img/gitter.svg">
-                            Discuss on Gitter
+                            Gitter
                         </a>
 
                         <a href="https://discuss.dgraph.io/"
@@ -514,6 +535,7 @@ Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Da
 <script src="typeahead.js"></script>
 <script src="app.js"></script>
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="/assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery.appear.js"></script>

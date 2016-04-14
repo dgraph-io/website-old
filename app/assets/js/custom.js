@@ -66,6 +66,25 @@ $(document).ready(function($) {
     }
 
     blockWrapper.addClass("show");
+
+    $('#bio_detail').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var name = button.find('h3').text()
+      var position = button.find('h5').text()
+      var imageSource = button.find('img').attr('src')
+      var description = button.siblings('p').html()
+      var twitterHref = button.siblings('.social').find('.twitter').attr('href')
+      var linkedinHref = button.siblings('.social').find('.linkedin').attr('href')
+      var modal = $(this)
+
+      $(this).find('.pic img').attr('src', imageSource)
+      $(this).find('.name h1').text(name)
+      $(this).find('.position h3').text(position)
+      $(this).find('.description').html(description)
+      $(this).find('.twitter').attr('href', twitterHref)
+      $(this).find('.linkedin').attr('href', linkedinHref)
+
+    })
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
