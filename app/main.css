@@ -1,3 +1,6 @@
+#join_us p {
+  opacity: 1;
+}
 .social {
   margin-top: 20px;
 }
@@ -87,6 +90,10 @@ nav {
   display: inline-block;
   width: 100%;
   text-align: center;
+}
+#jobs a {
+  text-transform: inherit;
+  color: #ea5f4d;
 }
 #footer .block-content {
   padding: 20px;
