@@ -1,3 +1,6 @@
+.center {
+  text-align: center;
+}
 #join_us p {
   opacity: 1;
 }
@@ -31,13 +34,19 @@
   top: -1px;
 }
 .modal-dialog {
-  width: 80%;
+  width: 70%;
+  margin: auto;
 }
 .modal-dialog .modal-body {
   background-color: white;
 }
 .modal-dialog .modal-body img {
-  max-width: 300px;
+  max-width: 80%;
+}
+@media (max-width: 768px) {
+  .modal-dialog .modal-body img {
+    max-width: 200px;
+  }
 }
 .modal-dialog .modal-body .name h1 {
   margin-top: 0px;
