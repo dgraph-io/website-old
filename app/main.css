@@ -10,6 +10,9 @@
 #mentions .bg {
   background-color: white;
 }
+#mentions .yahoo-logo a {
+  padding-top: 0px;
+}
 .center {
   text-align: center;
 }
