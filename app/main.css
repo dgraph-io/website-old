@@ -22,6 +22,15 @@
 #join_us p {
   opacity: 1;
 }
+.font-color-white {
+  color: black;
+}
+.play {
+  color: black;
+}
+.play a {
+  color: black;
+}
 .social {
   margin-top: 20px;
 }
@@ -365,9 +374,6 @@
 }
 .hero-slider.has-parallax .heading-wrapper .inner {
   min-height: 100vh;
-}
-.hero-slider.has-parallax .caption {
-  background-image: url(/assets/img/hero-img-app.jpg);
 }
 .caption-text h2:last-child {
   margin-bottom: 0;
