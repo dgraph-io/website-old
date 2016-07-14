@@ -17,18 +17,52 @@
 
 set -e
 
+BLACK='\033[30;1m'
+RED='\033[91;1m'
+GREEN='\033[32;1m'
+RESET='\033[0m'
+
+print_step() {
+    printf "$BLACK$1$RESET\n"
+}
+
+print_error() {
+    printf "$RED$1$RESET\n"
+}
+
+print_good() {
+    printf "$GREEN$1$RESET\n"
+}
+
 install_dgraph() {
-	echo "Hello from Dgraph!"
-	
-	sudo_cmd="sudo"
+
+printf $GREEN
+cat << "EOF"
+  _____                        _
+ |  __ \                      | |
+ | |  | | __ _ _ __ __ _ _ __ | |__
+ | |  | |/ _` | '__/ _` | '_ \| '_ \
+ | |__| | (_| | | | (_| | |_) | | | |
+ |_____/ \__, |_|  \__,_| .__/|_| |_|
+          __/ |         | |
+         |___/          |_|
+
+EOF
+printf $RESET
+
+	sudo_cmd=""
+	if hash sudo 2>/dev/null; then
+		sudo_cmd="sudo"
+	fi
+
 	install_path="/usr/local/bin"
-	
-	if [ -n "$(which curl)" ]; then
+
+	if hash curl 2>/dev/null; then
 		release_version="$(curl -s https://api.github.com/repos/dgraph-io/dgraph/releases | grep "tag_name" | awk '{print $2}' | tr -dc '[:alnum:].\n\r' | head -n1)"
-	elif [ -n "$(which wget)" ]; then
+	elif hash wget 2>/dev/null; then
 		release_version="$(wget -qO- 2>&1 https://api.github.com/repos/dgraph-io/dgraph/releases | grep "tag_name" | awk '{print $2}' | tr -dc '[:alnum:].\n\r' | head -n1)"
 	else
-		echo "Please install wget or curl to continue"
+		print_error "Please install wget or curl to continue."
 		exit 1
 	fi
 
@@ -39,47 +73,51 @@ install_dgraph() {
 	if hash dgraph 2>/dev/null; then
 		dgraph_path="$(which dgraph)"
 		dgraph_backup="dgraph_backup_olderversion"
-		echo "Backing up older versions in ~/$dgraph_backup"
+		print_step "Backing up older versions in ~/$dgraph_backup (password may be required)."
 		mkdir -p ~/$dgraph_backup
-		echo "(Password might be required.)"
 		$sudo_cmd mv $dgraph_path* ~/$dgraph_backup/.
 	fi
 
 	# Download and untar Dgraph binaries
-	if [ -n "$(which wget)" ]; then
-		if ! wget -q --spider "$dgraph_link"; then
-			echo "Downloading Dgraph from $dgraph_link"
-			wget -q "$dgraph_link" -O "/tmp/$tar_file"
+	if hash wget 2>/dev/null; then
+		print_step "Downloading $dgraph_link"
+		if wget -q --show-progress --progress=bar "$dgraph_link" -O "/tmp/$tar_file"; then
+			print_good "Download complete."
 		else
-			echo "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide"
+			print_error "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide"
+			echo
+			exit 1;
 		fi
-	elif [ -n "$(which curl)" ]; then
+	elif hash curl 2>/dev/null; then
 		if curl --output /dev/null --silent --head --fail "$dgraph_link"; then
-			echo "Downloading Dgraph from $dgraph_link"	
+			print_step "Downloading $dgraph_link"
 			curl -L --progress-bar "$dgraph_link" -o "/tmp/$tar_file"
+			print_good "Download complete."
 		else
-			echo "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide";
+			print_error "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide";
+			echo
 			exit 1;
 		fi
 	else
-		echo "Could not find curl or wget";
+		print_error "Could not find curl or wget.";
 		exit 1 ;
 	fi
 
-	echo "Inflating the binaries (Password required.)";
+	print_step "Inflating binaries (password may be required).";
 	$sudo_cmd tar -C /usr/local/bin -xzf /tmp/$tar_file;
 	rm "/tmp/"$tar_file;
 
 	# Check installation
 	if hash dgraph 2>/dev/null; then
-		echo "Voila! Dgraph $release_version has been installed successfully in /usr/local/bin";
-		echo "Please visit https://wiki.dgraph.io/Beginners_Guide for further instructions on usage"
-		dgraph --help;
+		print_good "Dgraph binaries $release_version has been installed successfully in /usr/local/bin.";
+		print_good "Please visit https://wiki.dgraph.io/Beginners_Guide for further instructions on usage."
+		echo
+		echo
 		exit 0;
 	else
-		echo "Installation failed. Please try again";
+		print_error "Installation failed. Please try again.";
 		exit 1;
-	fi	
+	fi
 }
 
 install_dgraph "$@"
