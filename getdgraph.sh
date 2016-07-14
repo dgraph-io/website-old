@@ -20,15 +20,18 @@ set -e
 install_dgraph() {
 	echo "Hello from Dgraph!"
 	
-	[[ $EUID -ne 0 && -z "$ANDROID_ROOT" ]] && sudo_cmd="sudo"
-
+	sudo_cmd="sudo"
 	install_path="/usr/local/bin"
-	if ! [ -n "$(which curl)" ]; then
-		echo "Please install curl to continue"
+	
+	if [ -n "$(which curl)" ]; then
+		release_version="$(curl -s https://api.github.com/repos/dgraph-io/dgraph/releases | grep "tag_name" | awk '{print $2}' | tr -dc '[:alnum:].\n\r' | head -n1)"
+	elif [ -n "$(which wget)" ]; then
+		release_version="$(wget -qO- 2>&1 https://api.github.com/repos/dgraph-io/dgraph/releases | grep "tag_name" | awk '{print $2}' | tr -dc '[:alnum:].\n\r' | head -n1)"
+	else
+		echo "Please install wget or curl to continue"
 		exit 1
 	fi
 
-	release_version="$(curl -s https://api.github.com/repos/dgraph-io/dgraph/releases | grep "tag_name" | awk '{print $2}' | tr -dc '[:alnum:].\n\r' | head -n1)"
 	tar_file=dgraph-"$(uname | tr '[:upper:]' '[:lower:]')"-amd64-$release_version".tar.gz"
 	dgraph_link="https://github.com/dgraph-io/dgraph/releases/download/"$release_version"/"$tar_file
 
@@ -43,7 +46,6 @@ install_dgraph() {
 	fi
 
 	# Download and untar Dgraph binaries
-
 	if [ -n "$(which wget)" ]; then
 		if ! wget -q --spider "$dgraph_link"; then
 			echo "Downloading Dgraph from $dgraph_link"
@@ -60,7 +62,7 @@ install_dgraph() {
 			exit 1;
 		fi
 	else
-		echo "could not find curl or wget";
+		echo "Could not find curl or wget";
 		exit 1 ;
 	fi
 
