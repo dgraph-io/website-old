@@ -81,7 +81,7 @@ printf $RESET
 	# Download and untar Dgraph binaries
 	if hash wget 2>/dev/null; then
 		print_step "Downloading $dgraph_link"
-		if wget -q --show-progress --progress=bar "$dgraph_link" -O "/tmp/$tar_file"; then
+		if wget --progress=bar "$dgraph_link" -O "/tmp/$tar_file"; then
 			print_good "Download complete."
 		else
 			print_error "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide"
