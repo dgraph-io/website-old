@@ -109,7 +109,7 @@ printf $RESET
 
 	# Check installation
 	if hash dgraph 2>/dev/null; then
-		print_good "Dgraph binaries $release_version has been installed successfully in /usr/local/bin.";
+		print_good "Dgraph binaries $release_version have been installed successfully in /usr/local/bin.";
 		print_good "Please visit https://wiki.dgraph.io/Beginners_Guide for further instructions on usage."
 		echo
 		echo
