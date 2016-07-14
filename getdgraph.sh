@@ -49,14 +49,14 @@ install_dgraph() {
 			echo "Downloading Dgraph from $dgraph_link"
 			wget -q "$dgraph_link" -O "/tmp/$tar_file"
 		else
-			echo "Sorry. Binaries not available for your platform. Please compile manually."
+			echo "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide"
 		fi
 	elif [ -n "$(which curl)" ]; then
 		if curl --output /dev/null --silent --head --fail "$dgraph_link"; then
 			echo "Downloading Dgraph from $dgraph_link"	
 			curl -L --progress-bar "$dgraph_link" -o "/tmp/$tar_file"
 		else
-			echo "Sorry. Binaries not available for your platform. Please compile manually.";
+			echo "Sorry. Binaries not available for your platform. Please compile manually: https://wiki.dgraph.io/Beginners_Guide";
 			exit 1;
 		fi
 	else
@@ -71,7 +71,7 @@ install_dgraph() {
 	# Check installation
 	if hash dgraph 2>/dev/null; then
 		echo "Voila! Dgraph $release_version has been installed successfully in /usr/local/bin";
-		echo "Please visit https://wiki.dgraph.io/Beginners_Guide#Running_Dgraph for further instructions on usage"
+		echo "Please visit https://wiki.dgraph.io/Beginners_Guide for further instructions on usage"
 		dgraph --help;
 		exit 0;
 	else
