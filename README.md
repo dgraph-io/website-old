@@ -1,4 +1,4 @@
-[![Slack Status](http://slack.dgraph.io/badge.svg)](http://slack.dgraph.io)
+[![Slack Status](https://slack.dgraph.io/badge.svg)](https://slack.dgraph.io)
 
 # Website
 Website code for dgraph.io. The best way to run this would be inside a docker container.
