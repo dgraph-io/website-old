@@ -9,7 +9,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 title: 'Film Director',
                 sample_code: "" +
                     "{\n" +
-                    "  me(_xid_: m.06pj8) {\n" +
+                    "  debug(_xid_: m.06pj8) {\n" +
                     "    type.object.name.en\n" +
                     "    film.director.film {\n" +
                     "      type.object.name.en\n" +
@@ -34,7 +34,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 title: 'Actor',
                 sample_code: "" +
                     "{\n" +
-                    "  me(_xid_: m.0bxtg) {\n" +
+                    "  debug(_xid_: m.0bxtg) {\n" +
                     "    type.object.name.en\n" +
                     "    film.actor.film {\n" +
                     "      film.performance.film {\n" +
@@ -49,7 +49,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 title: 'Movie',
                 sample_code: "" +
                     "{\n" +
-                    "  me(_xid_: m.07bwr) {\n" +
+                    "  debug(_xid_: m.07bwr) {\n" +
                     "    type.object.name.en\n" +
                     "    film.film.initial_release_date\n" +
                     "    film.film.country\n" +
@@ -158,9 +158,9 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 return;
             }
             var newExpr = cached.xid ? "_xid_: " + cached.xid : "_uid_: " + cached.uid;
-            var newCode = $scope.active_tab.code.replace(/me\s*\([^()]+\)/, "me(" + newExpr + ")");
+            var newCode = $scope.active_tab.code.replace(/debug\s*\([^()]+\)/, "debug(" + newExpr + ")");
             if (newCode == $scope.active_tab.code && newCode.indexOf(newExpr) < 0) {
-                alert('Your query must contain string "me(_xid_: <some id>) for autocomplete to work"');
+                alert('Your query must contain string "debug(_xid_: <some id>) for autocomplete to work"');
             }
             $scope.active_tab.code = newCode;
 
@@ -275,7 +275,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 $scope.had_network_error = false;
                 $scope.lastReceivedVersion = currentCodeVersion;
 
-                $scope.query_result = response.data._root_&& response.data._root_[0];
+                $scope.query_result = response.data.debug && response.data.debug[0];
                 $scope.json_result = JSON.stringify($scope.query_result, null, 2);
 
                 $scope.cache_entities($scope.query_result);
