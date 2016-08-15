@@ -1,628 +1,628 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Manish Rai Jain">
-    <meta name="description" content="Dgraph - an open source, low latency, high throughput, native and distributed graph database.">
-    <meta name="robots" content="noodp"/>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Manish Rai Jain">
+		<meta name="description" content="Dgraph - an open source, low latency, high throughput, native and distributed graph database.">
+		<meta name="robots" content="noodp"/>
 
-    <link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon"/>
+		<link rel="shortcut icon" href="/favicon.ico?v=2" type="image/x-icon"/>
 
-    <link href="/assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
-    <link href="/assets/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:500,400,100,300,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-select.min.css" type="text/css">
+		<link href="/assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+		<link href="/assets/fonts/elegant-fonts.css" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:500,400,100,300,400italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="/assets/css/owl.carousel.css" type="text/css">
+		<link rel="stylesheet" href="/assets/css/bootstrap-select.min.css" type="text/css">
 
-    <link rel="stylesheet" href="/assets/css/color-red-medium.css" type="text/css">
+		<link rel="stylesheet" href="/assets/css/color-red-medium.css" type="text/css">
 
-    <title>Dgraph - Scalable, Distributed, Low Latency, High Throughput Graph Database</title>
+		<title>Dgraph - Scalable, Distributed, Low Latency, High Throughput Graph Database</title>
 
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+		<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+		<link rel="stylesheet" href="main.css">
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-75364122-1', 'auto');
-      ga('send', 'pageview');
+ga('create', 'UA-75364122-1', 'auto');
+ga('send', 'pageview');
 
-    </script>
-</head>
+		</script>
+	</head>
 
-<body>
+	<body>
 
-<div class="overlay"></div>
+		<div class="overlay"></div>
 
-<div class="modal" id="bio_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4 pic">
-            <img src=""></img>
-          </div>
-          <div class="col-xs-12 col-sm-8 bio">
-            <div class="name"><h1></h1></div>
-            <div class="position"><h3></h3></div>
-            <div class="description"></div>
-            <div class="social">
-                <a class="twitter" href="" target="_blank">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a class="linkedin" href="" target="_blank">
-                    <i class="fa fa-linkedin"></i>
-                </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+		<div class="modal" id="bio_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-4 pic">
+							<img src=""></img>
+						</div>
+						<div class="col-xs-12 col-sm-8 bio">
+							<div class="name"><h1></h1></div>
+							<div class="position"><h3></h3></div>
+							<div class="description"></div>
+							<div class="social">
+								<a class="twitter" href="" target="_blank">
+									<i class="fa fa-twitter"></i>
+								</a>
+								<a class="linkedin" href="" target="_blank">
+									<i class="fa fa-linkedin"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
 
-<div class="modal" id="join_us" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-body">
-        <p>We are looking for outstanding backend engineers from North America to join our team. As part of the team, you would be responsible for the design, architecture and implementation of our native and distributed open source graph database, Dgraph.</p>
+		<div class="modal" id="join_us" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-body">
+					<p>We are looking for outstanding backend engineers from North America to join our team. As part of the team, you would be responsible for the design, architecture and implementation of our native and distributed open source graph database, Dgraph.</p>
 
-        <p>Requirements:
-          <ul>
-            <li>3+ yrs of backend engineering experience.</li>
-            <li>Experience developing distributed systems or databases.</li>
-            <li>Experience building applications in C, C++ or Go.</li>
-          </ul>
-        </p>
-        <p>Nice to haves:
-          <ul>
-            <li>Previous experience at Google, Facebook, Twitter or Dropbox. Check out our <a href="https://docs.google.com/spreadsheets/d/1LTYPzXO7kCHaacYs_sTYyeX9MoYNH1nsI6Arw1N-HL8/edit?usp=sharing" target="_blank">Samurai equity multiplier</a>.</li>
-            <li>Bachelor's degree in Computer Science.</li>
-            <li>Passionate about working on and contributing to Open Source.</li>
-          </ul>
-        </p>
+					<p>Requirements:
+					<ul>
+						<li>3+ yrs of backend engineering experience.</li>
+						<li>Experience developing distributed systems or databases.</li>
+						<li>Experience building applications in C, C++ or Go.</li>
+					</ul>
+					</p>
+					<p>Nice to haves:
+					<ul>
+						<li>Previous experience at Google, Facebook, Twitter or Dropbox. Check out our <a href="https://docs.google.com/spreadsheets/d/1LTYPzXO7kCHaacYs_sTYyeX9MoYNH1nsI6Arw1N-HL8/edit?usp=sharing" target="_blank">Samurai equity multiplier</a>.</li>
+						<li>Bachelor's degree in Computer Science.</li>
+						<li>Passionate about working on and contributing to Open Source.</li>
+					</ul>
+					</p>
 
-        <p>If this sounds interesting to you, drop us a mail at <a href="mailto:join@dgraph.io">join@dgraph.io</a></p>
-      </div>
-    </div>
-  </div>
-</div>
+					<p>If this sounds interesting to you, drop us a mail at <a href="mailto:join@dgraph.io">join@dgraph.io</a></p>
+				</div>
+			</div>
+		</div>
+		</div>
 
-<div class="page-wrapper">
-    <section class="hero-slider has-parallax">
-        <div class="heading-wrapper">
-            <div class="inner">
-                <div class="caption position-middle">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="block x-va-middle">
-                                    <div class="block-content">
-                                        <div class="caption-text animate from-bottom">
-                                            <div class="block-content">
-                                                <h1 class="font-color-white main-title"><img src="assets/img/logo.png"></h1>
-                                                <iframe class="github-button" src="https://ghbtns.com/github-btn.html?user=dgraph-io&repo=dgraph&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-                                                <h2 class="font-color-white">Scalable, Distributed, Low Latency, High Throughput Graph Database.</h2>
-                                            </div>
-                                        </div>
+		<div class="page-wrapper">
+			<section class="hero-slider has-parallax">
+				<div class="heading-wrapper">
+					<div class="inner">
+						<div class="caption position-middle">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="block x-va-middle">
+											<div class="block-content">
+												<div class="caption-text animate from-bottom">
+													<div class="block-content">
+														<h1 class="font-color-white main-title"><img src="assets/img/logo.png"></h1>
+														<iframe class="github-button" src="https://ghbtns.com/github-btn.html?user=dgraph-io&repo=dgraph&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+														<h2 class="font-color-white">Scalable, Distributed, Low Latency, High Throughput Graph Database.</h2>
+													</div>
+												</div>
 
-                                        <p class="play bg-dark">Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Data</a> loaded up on demo Dgraph instance, via <a href="https://github.com/facebook/graphql">GraphQL</a> in real time.
-                                        </p>
+												<p class="play bg-dark">Play with <a href="http://www.freebase.com/film">21M facts from Freebase Film Data</a> loaded up on demo Dgraph instance, via <a href="https://github.com/facebook/graphql">GraphQL</a> in real time.
+												</p>
 
-                                        <div class="codepen animate from-bottom ng-cloak" ng-app="darthGraph" ng-controller="GraphMagic">
+												<div class="codepen animate from-bottom ng-cloak" ng-app="darthGraph" ng-controller="GraphMagic">
 
-                                            <ul class=querytabs>
-                                                <li ng-repeat='tab in examples' ng-click='activate($index)' class="{{tab.active ? 'active' : ''}}">
-                                                    <button ng-click='activate($index)'>{{ tab.title}}</button>
-                                                </li>
-                                            </ul>
+													<ul class=querytabs>
+														<li ng-repeat='tab in examples' ng-click='activate($index)' class="{{tab.active ? 'active' : ''}}">
+															<button ng-click='activate($index)'>{{ tab.title}}</button>
+														</li>
+													</ul>
 
-                                            <div class=query>
-                                                <h2>graphql query</h2>
-                                                <div class="root-id">
-                                                    Name:
-                                                    <input type="text"
-                                                           ng-model="typeahead_root_id"
-                                                           uib-typeahead="x.name for x in fetch_kg($viewValue)" huy="| filter:$viewValue | limitTo:10"
-                                                           typeahead-editable="false"
-                                                           select-on-click
-                                                           />
-                                                </div>
-                                                <div ui-ace="{
-                                                       useWrapMode : true,
-                                                       showGutter: false,
-                                                       theme:'tomorrow_night_eighties',
-                                                       mode: 'javascript',
-                                                       onLoad: queryEditorLoaded,
-                                                       require: ['ace/ext/language_tools'],
-                                                       advanced: {
-                                                           enableSnippets: false,
-                                                           enableBasicAutocompletion: true,
-                                                           enableLiveAutocompletion: true
-                                                       },
-                                                     }"
-                                                     ng-model="active_tab.code" class=editor></div>
-                                                <div class=float>
-                                                    <!-- <button class="positive">Run Query</button> -->
-                                                    <button ng-click="reset_example_code()" class="danger" ng-class="{hidden: active_tab.code == active_tab.sample_code}">Undo Changes</button>
-                                                </div>
-                                            </div>
+													<div class=query>
+														<h2>graphql query</h2>
+														<div class="root-id">
+															Name:
+															<input type="text"
+											ng-model="typeahead_root_id"
+					 uib-typeahead="x.name for x in fetch_kg($viewValue)" huy="| filter:$viewValue | limitTo:10"
+																													 typeahead-editable="false"
+															select-on-click
+															/>
+														</div>
+														<div ui-ace="{
+														useWrapMode : true,
+														showGutter: false,
+														theme:'tomorrow_night_eighties',
+														mode: 'javascript',
+														onLoad: queryEditorLoaded,
+														require: ['ace/ext/language_tools'],
+														advanced: {
+														enableSnippets: false,
+														enableBasicAutocompletion: true,
+														enableLiveAutocompletion: true
+														},
+														}"
+									 ng-model="active_tab.code" class=editor></div>
+														<div class=float>
+															<!-- <button class="positive">Run Query</button> -->
+															<button ng-click="reset_example_code()" class="danger" ng-class="{hidden: active_tab.code == active_tab.sample_code}">Undo Changes</button>
+														</div>
+													</div>
 
-                                            <div class=result>
-                                                <span class='spinner' ng-show="isNetPending()">
-                                                    <i class="fa fa-spinner icon-myspin"></i>
-                                                    Processing...
-                                                </span>
-                                                <table class="latencycontainer" ng-hide="isNetPending()">
-                                                    <tr class="entities">
-                                                        <td>Entities found</td>
-                                                        <td>:</td>
-                                                        <td>{{latency_data.entity_count}}</td>
-                                                    </tr>
-                                                    <tr class="total">
-                                                        <td>Server latency</td>
-                                                        <td>:</td>
-                                                        <td>{{ latency_data.total }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="processing">Processing</td>
-                                                        <td>:</td>
-                                                        <td>{{latency_data.processing}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="jsongen">JSON Conversion</td>
-                                                        <td>:</td>
-                                                        <td>{{latency_data.json}}</td>
-                                                    </tr>
-                                                </table>
-                                                <div class="tabcontainer">
-                                                    <h2 class="resulttab"
-                                                        ng-class="{active: result_json}"
-                                                        ng-click="result_json=true">
-                                                        json
-                                                    </h2>
-                                                    <h2 class="resulttab"
-                                                        ng-class="{active:!result_json}"
-                                                        ng-click="result_json=false">
-                                                        tree
-                                                    </h2>
-                                                </div>
-                                                <div ui-ace="{
-                                                        useWrapMode : true,
-                                                        showGutter: false,
-                                                        readOnly: true,
-                                                        theme:'tomorrow_night_eighties',
-                                                        mode: 'javascript',
-                                                        onLoad: responseEditorLoaded,
-                                                     }"
-                                                     readonly
-                                                     ng-model="json_result"
-                                                     ng-show="result_json"
-                                                     class=editor></div>
-                                                <div class="tree" ng-if="!result_json">
-                                                    <tree obj="query_result" expanded="true"></tree>
-                                                    <div ng-if="!query_result">query result is not available</div>
-                                                </div>
-                                                <div ng-if="had_network_error" style="color:#f2777a">Error talking to server</div>
-                                            </div>
+													<div class=result>
+														<span class='spinner' ng-show="isNetPending()">
+															<i class="fa fa-spinner icon-myspin"></i>
+															Processing...
+														</span>
+														<table class="latencycontainer" ng-hide="isNetPending()">
+															<tr class="entities">
+																<td>Entities found</td>
+																<td>:</td>
+																<td>{{latency_data.entity_count}}</td>
+															</tr>
+															<tr class="total">
+																<td>Server latency</td>
+																<td>:</td>
+																<td>{{ latency_data.total }}</td>
+															</tr>
+															<tr>
+																<td class="processing">Processing</td>
+																<td>:</td>
+																<td>{{latency_data.processing}}</td>
+															</tr>
+															<tr>
+																<td class="jsongen">JSON Conversion</td>
+																<td>:</td>
+																<td>{{latency_data.json}}</td>
+															</tr>
+														</table>
+														<div class="tabcontainer">
+															<h2 class="resulttab"
+									 ng-class="{active: result_json}"
+					ng-click="result_json=true">
+																json
+															</h2>
+															<h2 class="resulttab"
+									 ng-class="{active:!result_json}"
+					ng-click="result_json=false">
+																tree
+															</h2>
+														</div>
+														<div ui-ace="{
+														useWrapMode : true,
+														showGutter: false,
+														readOnly: true,
+														theme:'tomorrow_night_eighties',
+														mode: 'javascript',
+														onLoad: responseEditorLoaded,
+														}"
+									 readonly
+									 ng-model="json_result"
+					ng-show="result_json"
+		 class=editor></div>
+														<div class="tree" ng-if="!result_json">
+															<tree obj="query_result" expanded="true"></tree>
+															<div ng-if="!query_result">query result is not available</div>
+														</div>
+														<div ng-if="had_network_error" style="color:#f2777a">Error talking to server</div>
+													</div>
 
-                                            <script type="text/ng-template" id="tree_node.html">
-                                                <div ng-if="obj" class="treenode">
-                                                    <div class="title" ng-click="expanded=!expanded">
-                                                        {{summary.title}}
-                                                    </div>
-                                                    <div ng-if="expanded" ng-repeat="field in fields" class="field">
-                                                        <div class="key">{{field.key}}</div>
-                                                        <div class="atomvalue"> {{field.value}}</div>
-                                                        <div class="objvalue">
-                                                            <tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
-                                                            <div ng-if="field.array">
-                                                                <div class="arraysummary"
-                                                                     ng-if="!field.expanded"
-                                                                     ng-click="field.expanded=true">
-                                                                    <i class="fa fa-plus-circle"></i>
-                                                                    {{field.array.length}} item{{field.array.length!=1?'s':''}}
-                                                                </div>
-                                                                <div ng-if="field.expanded">
-                                                                    <div class="arrayoutline" ng-click="field.expanded=false">
-                                                                        <i class="fa fa-minus-circle"></i>
-                                                                        {{field.array.length}} item{{field.array.length!=1?'s':''}}
-                                                                    </div>
-                                                                    <table>
-                                                                        <tr ng-repeat="el in field.array track by el._uid_">
-                                                                            <td>{{$index}}&nbsp;</td>
-                                                                            <td>
-                                                                                <tree
-                                                                                      ng-class-odd='"odd"'
-                                                                                      obj="el"
-                                                                                      expanded="false"></tree>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </script>
-                                        </div> <!-- /codepen -->
+													<script type="text/ng-template" id="tree_node.html">
+<div ng-if="obj" class="treenode">
+																										<div class="title" ng-click="expanded=!expanded">
+																												{{summary.title}}
+																										</div>
+																										<div ng-if="expanded" ng-repeat="field in fields" class="field">
+																												<div class="key">{{field.key}}</div>
+																												<div class="atomvalue"> {{field.value}}</div>
+																												<div class="objvalue">
+																														<tree ng-if="field.subobj" obj="field.subobj" expanded="false"></tree>
+																														<div ng-if="field.array">
+																																<div class="arraysummary"
+																																		 ng-if="!field.expanded"
+																																		 ng-click="field.expanded=true">
+																																		<i class="fa fa-plus-circle"></i>
+																																		{{field.array.length}} item{{field.array.length!=1?'s':''}}
+																																</div>
+																																<div ng-if="field.expanded">
+																																		<div class="arrayoutline" ng-click="field.expanded=false">
+																																				<i class="fa fa-minus-circle"></i>
+																																				{{field.array.length}} item{{field.array.length!=1?'s':''}}
+																																		</div>
+																																		<table>
+																																				<tr ng-repeat="el in field.array track by el._uid_">
+																																						<td>{{$index}}&nbsp;</td>
+																																						<td>
+																																								<tree
+																																											ng-class-odd='"odd"'
+																																											obj="el"
+																																											expanded="false"></tree>
+																																						</td>
+																																				</tr>
+																																		</table>
+																																</div>
+																														</div>
+																												</div>
+																										</div>
+																								</div>
+													</script>
+												</div> <!-- /codepen -->
 
-                                        <!--<div class="buttonrow animate from-bottom">-->
-                                            <!--<a href="#boxes" class="btn btn-framed btn-light btn-default btn-xl roll">View More</a>-->
-                                        <!--</div>-->
+												<!--<div class="buttonrow animate from-bottom">-->
+												<!--<a href="#boxes" class="btn btn-framed btn-light btn-default btn-xl roll">View More</a>-->
+												<!--</div>-->
 
-                                        <!--/ .animate-->
-                                    </div>
-                                    <!--/ .block-content-->
-                                </div>
-                                <!--/ .block-->
-                            </div>
-                            <!--/ .col-md-8-->
-                        </div>
-                        <!--/ .row-->
-                    </div>
-                    <!--/ .container-->
-                </div>
-                <!--/ .heading-->
-            </div>
-            <!--/ .inner-->
-        </div>
-        <!--/ .heading-wrapper-->
-    </section>
-    <!--/ .hero-slider-->
+												<!--/ .animate-->
+											</div>
+											<!--/ .block-content-->
+										</div>
+										<!--/ .block-->
+									</div>
+									<!--/ .col-md-8-->
+								</div>
+								<!--/ .row-->
+							</div>
+							<!--/ .container-->
+						</div>
+						<!--/ .heading-->
+					</div>
+					<!--/ .inner-->
+				</div>
+				<!--/ .heading-wrapper-->
+			</section>
+			<!--/ .hero-slider-->
 
-    <section class="block-wrapper" id="boxes">
-        <div class="container">
-            <div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
-                <div class="block-content">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <div class="box-icon">
-                                <i class="icon_clock_alt"></i>
-                                <h3>Low Latency, High Throughput</h3>
-                                <p>
-                                    Storage layer of Dgraph is designed for efficient retrieval,
-                                    it offers low enough latency to be serving real time user queries, over terabytes of structured data.
-                                </p>
-                            </div>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                        <div class="col-md-4 col-sm-4">
-                            <div class="box-icon">
-                                <i class="icon_flowchart"></i>
-                                <h3>Distributed and Scalable</h3>
-                                <p>
-                                    Easily scale to multiple machines, or datacenters.
-                                    Dgraph's sharded storage and query processing were specifically designed to minimize the number of network calls.
-                                </p>
-                            </div>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                        <div class="col-md-4 col-sm-4">
-                            <div class="box-icon">
-                                <i class="icon_lightbulb_alt"></i>
-                                <h3>Open Source</h3>
-                                <p>
-                                    Written entirely in Go language, Dgraph is available under a very liberal Apache License 2.0.
-                                </p>
-                            </div>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                    </div>
-                    <!--/ .row-->
-                    <div class="bg"></div>
-                    <!--/ .bg-->
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
-    <!--/ .block-wrapper-->
+			<section class="block-wrapper" id="boxes">
+				<div class="container">
+					<div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
+						<div class="block-content">
+							<div class="row">
+								<div class="col-md-4 col-sm-4">
+									<div class="box-icon">
+										<i class="icon_clock_alt"></i>
+										<h3>Low Latency, High Throughput</h3>
+										<p>
+										Storage layer of Dgraph is designed for efficient retrieval,
+										it offers low enough latency to be serving real time user queries, over terabytes of structured data.
+										</p>
+									</div>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
+								<div class="col-md-4 col-sm-4">
+									<div class="box-icon">
+										<i class="icon_flowchart"></i>
+										<h3>Distributed and Scalable</h3>
+										<p>
+										Easily scale to multiple machines, or datacenters.
+										Dgraph's sharded storage and query processing were specifically designed to minimize the number of network calls.
+										</p>
+									</div>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
+								<div class="col-md-4 col-sm-4">
+									<div class="box-icon">
+										<i class="icon_lightbulb_alt"></i>
+										<h3>Open Source</h3>
+										<p>
+										Written entirely in Go language, Dgraph is available under a very liberal Apache License 2.0.
+										</p>
+									</div>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
+							</div>
+							<!--/ .row-->
+							<div class="bg"></div>
+							<!--/ .bg-->
+						</div>
+						<!--/ .block-content-->
+					</div>
+					<!--/ .block-->
+				</div>
+				<!--/ .container-->
+			</section>
+			<!--/ .block-wrapper-->
 
-    <section class="block-wrapper" id="team">
-        <div class="container">
-            <div class="block bg-light bg-expand-both x-va-middle">
-                <div class="block-content">
-                    <h1 class="center">The Team</h1>
-                    <div class="row">
-                        <div class="col-sm-4 center">
-                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
-                                <!-- <div class="box-icon"> -->
-                                <img src="assets/img/profile.jpeg">
-                                <h3>Manish Jain</h3>
-                                <h5>Founder & CEO</h5>
-                                <div class="social">
-                                    <a class="twitter" href="https://twitter.com/manishrjain">
-                                    </a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/manishrjain"></a>
-                                </div>
-                                <p  class="desc">Manish is the Chief decision maker at Dgraph. He got thrust into distributed systems right out of college, working on real time web indexing system at Google. He then lead various projects to consolidate and serve knowledge graph right behind web search.<br>
-                                Implementing GTD and Zero Waste practices, Manish is into efficient and minimalist living. He loves cycling, swimming and ultra light travelling.</p>
-                                <!-- </div> -->
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                        <div class="col-sm-4 center">
-                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
-                                <img src="assets/img/prashanth.jpg">
-                                <h3>Prashanth Koppula</h3>
-                                <h5>COO</h5>
-                                <div class="social">
-                                    <a class="twitter" href="https://twitter.com/koppula"></a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/prashanthrkoppula"></a>
-                                </div>
-                                <p class="desc">
-                                    Prashanth is responsible for all things operations and growth at Dgraph. He enjoys wearing many hats and has extensive product experience. Most recently he led product at Google for web scale indexing technology such as Teragoogle as well as advertiser and publisher focused monetization products. With a love for sustainable architecture, he dreams of building his very own zero energy home. Other interests include squash, traveling, and Lego.
-                                </p>
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                        <div class="col-sm-4 center">
-                            <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
-                                <img src="assets/img/choki_e.jpg">
-                                <h3>Ashwin Ramesh</h3>
-                                <h5>Backend Engineer</h5>
-                                <div class="social">
-                                    <a class="twitter" href="https://twitter.com/ashwin_rrr"></a>
-                                    <a class="linkedin" href="https://www.linkedin.com/in/ashwin95r"></a>
-                                </div>
-                                <p class="desc">
-                                    Ashwin did his undergrad in computer science at IIT Madras and likes working on distributed systems. He likes working out, hiking, swimming and everything adventurous. Loves travelling to new places and trying out new food.
-                                </p>
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                    </div>
+			<section class="block-wrapper" id="team">
+				<div class="container">
+					<div class="block bg-light bg-expand-both x-va-middle">
+						<div class="block-content">
+							<h1 class="center">The Team</h1>
+							<div class="row">
+								<div class="col-sm-4 center">
+									<a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+										<!-- <div class="box-icon"> -->
+										<img src="assets/img/profile.jpeg">
+										<h3>Manish Jain</h3>
+										<h5>Founder & CEO</h5>
+										<div class="social">
+											<a class="twitter" href="https://twitter.com/manishrjain">
+											</a>
+											<a class="linkedin" href="https://www.linkedin.com/in/manishrjain"></a>
+										</div>
+										<p  class="desc">Manish is the Chief decision maker at Dgraph. He got thrust into distributed systems right out of college, working on real time web indexing system at Google. He then lead various projects to consolidate and serve knowledge graph right behind web search.<br>
+										Implementing GTD and Zero Waste practices, Manish is into efficient and minimalist living. He loves cycling, swimming and ultra light travelling.</p>
+										<!-- </div> -->
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
+								<div class="col-sm-4 center">
+									<a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+										<img src="assets/img/choki_e.jpg">
+										<h3>Ashwin Ramesh</h3>
+										<h5>Backend Engineer</h5>
+										<div class="social">
+											<a class="twitter" href="https://twitter.com/ashwin_rrr"></a>
+											<a class="linkedin" href="https://www.linkedin.com/in/ashwin95r"></a>
+										</div>
+										<p class="desc">
+										Ashwin did his undergrad in computer science at IIT Madras and likes working on distributed systems. He likes working out, hiking, swimming and everything adventurous. Loves travelling to new places and trying out new food.
+										</p>
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
 
-                    <div class="row">
-                        <div class="col-sm-4 center">
-                          <a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
-                              <img src="assets/img/profile_bw.png">
-                              <h3>Pawan Rawal</h3>
-                              <h5>Backend Engineer</h5>
-                              <div class="social">
-                                  <a class="twitter" href="https://twitter.com/pawan_rawal"></a>
-                                  <a class="linkedin" href="https://www.linkedin.com/in/pawanrawal1"></a>
-                              </div>
-                              <p class="desc">
-                                  After graduating from IIT Delhi in 2014, Pawan worked in various startups understanding how the web works. His interest in distributed systems and application of concepts in Computer Science to solve real world problems led him to Dgraph. In his free time, he likes to travel, do yoga, read and cook.
-                              </p>
-                          </a>
-                            <!--/ .box-icon-->
-                        </div>
-                    </div>
-                    <!--/ .row-->
-                    <div class="bg"></div>
-                    <!--/ .bg-->
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
-    <!--/ .block-wrapper-->
+								<div class="col-sm-4 center">
+									<a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+										<img src="assets/img/profile_bw.png">
+										<h3>Pawan Rawal</h3>
+										<h5>Backend Engineer</h5>
+										<div class="social">
+											<a class="twitter" href="https://twitter.com/pawan_rawal"></a>
+											<a class="linkedin" href="https://www.linkedin.com/in/pawanrawal1"></a>
+										</div>
+										<p class="desc">
+										After graduating from IIT Delhi in 2014, Pawan worked in various startups understanding how the web works. His interest in distributed systems and application of concepts in Computer Science to solve real world problems led him to Dgraph. In his free time, he likes to travel, do yoga, read and cook.
+										</p>
+									</a>
+									<!--/ .box-icon-->
+								</div>
+							</div>
+							<div class="row">
+								<!--/ .col-md-4 col-sm-4-->
+								<div class="col-sm-4 center">
+									<a class="btn box-icon" data-toggle="modal" data-target="#bio_detail">
+										<img src="assets/img/jiawei.jpg">
+										<h3>Jay Chiu</h3>
+										<h5>Backend Engineer</h5>
+										<div class="social">
+											<a class="twitter" href="#"></a>
+											<a class="linkedin" href="https://www.linkedin.com/in/jiawei-chiu-0710ba29"></a>
+										</div>
+										<p class="desc">
+										JC did his undergrad in Computer Science and Math at UC Berkeley, and PhD in Math at MIT. After graduation, he went to Google to work as a software engineer in Search Ads Quality, where he worked on large scale machine learning systems to price and rank ads. His interests are in distributed systems and machine learning.
+										</p>
+									</a>
+									<!--/ .box-icon-->
+								</div>
+							</div>
+							<!--/ .row-->
+							<div class="bg"></div>
+							<!--/ .bg-->
+						</div>
+						<!--/ .block-content-->
+					</div>
+					<!--/ .block-->
+				</div>
+				<!--/ .container-->
+			</section>
+			<!--/ .block-wrapper-->
 
-    <section class="block-wrapper" id="jobs">
-        <div class="container">
-            <div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
-                <div class="block-content">
-                    <h1 class="center">Work With Us</h1>
-                    <h4 class="center">Passionate about solving challenging problems? Prefer an honest, open and transparent culture? You will love it here.</h2>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-credit-card fa-5x" aria-hidden="true"></i>
-                                <p class="center">Open and Transparent<br>
-                                <a href="https://docs.google.com/spreadsheets/d/1LTYPzXO7kCHaacYs_sTYyeX9MoYNH1nsI6Arw1N-HL8/edit?usp=sharing" target="_blank">See our salary and equity formula</a></p>
-                            </div>
-                        </div>
+			<section class="block-wrapper" id="jobs">
+				<div class="container">
+					<div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
+						<div class="block-content">
+							<h1 class="center">Work With Us</h1>
+							<h4 class="center">Passionate about solving challenging problems? Prefer an honest, open and transparent culture? You will love it here.</h2>
+							<div class="row">
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-credit-card fa-5x" aria-hidden="true"></i>
+										<p class="center">Open and Transparent<br>
+										<a href="https://docs.google.com/spreadsheets/d/1LTYPzXO7kCHaacYs_sTYyeX9MoYNH1nsI6Arw1N-HL8/edit?usp=sharing" target="_blank">See our salary and equity formula</a></p>
+									</div>
+								</div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="center fa fa-laptop fa-5x" aria-hidden="true"></i>
-                                <p class="center">Get your own Macbook Pro</p>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-xs-block"></div>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="center fa fa-laptop fa-5x" aria-hidden="true"></i>
+										<p class="center">Get your own Macbook Pro</p>
+									</div>
+								</div>
+								<div class="clearfix visible-xs-block"></div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-desktop fa-5x" aria-hidden="true"></i>
-                                <p class="center">$2500 towards a workstation and desk of your choice</p>
-                            </div>
-                        </div>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-desktop fa-5x" aria-hidden="true"></i>
+										<p class="center">$2500 towards a workstation and desk of your choice</p>
+									</div>
+								</div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-tablet fa-5x" aria-hidden="true"></i>
-                                <p class="center">Kindle for every team member<br>Unlimited books<br>
-                                Read only Fridays</p>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-xs-block"></div>
-                    </div>
-                    <div class="row">
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-tablet fa-5x" aria-hidden="true"></i>
+										<p class="center">Kindle for every team member<br>Unlimited books<br>
+										Read only Fridays</p>
+									</div>
+								</div>
+								<div class="clearfix visible-xs-block"></div>
+							</div>
+							<div class="row">
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-medkit fa-5x" aria-hidden="true"></i>
-                                <p class="center">Medical coverage for you and your dependents</p>
-                            </div>
-                        </div>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-medkit fa-5x" aria-hidden="true"></i>
+										<p class="center">Medical coverage for you and your dependents</p>
+									</div>
+								</div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-futbol-o fa-5x" aria-hidden="true"></i>
-                                <p class="center">Fitness and Sports<br>
-                                If you sweat, we'll pay for it</p>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-xs-block"></div>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-futbol-o fa-5x" aria-hidden="true"></i>
+										<p class="center">Fitness and Sports<br>
+										If you sweat, we'll pay for it</p>
+									</div>
+								</div>
+								<div class="clearfix visible-xs-block"></div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-clock-o fa-5x" aria-hidden="true"></i>
-                                <p class="center">Work anytime, anywhere in North America<br>
-                                We'll cover your co-working space costs</p>
-                            </div>
-                        </div>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-clock-o fa-5x" aria-hidden="true"></i>
+										<p class="center">Work anytime, anywhere in North America<br>
+										We'll cover your co-working space costs</p>
+									</div>
+								</div>
 
-                        <div class="col-xs-6 col-sm-3">
-                            <div class="box-icon">
-                                <i class="fa fa-plane fa-5x" aria-hidden="true"></i>
-                                <p class="center">Flexible Time Off<br>
-                                Completely self-manage when you need to take some time off</p>
-                            </div>
-                        </div>
-                        <div class="clearfix visible-xs-block"></div>
-                    </div>
-                    <h4 class="center"><a class="btn box-icon" data-toggle="modal" data-target="#join_us">We are hiring!</a></h4>
-                    <!--/ .row-->
-                    <div class="bg"></div>
-                    <!--/ .bg-->
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
+								<div class="col-xs-6 col-sm-3">
+									<div class="box-icon">
+										<i class="fa fa-plane fa-5x" aria-hidden="true"></i>
+										<p class="center">Flexible Time Off<br>
+										Completely self-manage when you need to take some time off</p>
+									</div>
+								</div>
+								<div class="clearfix visible-xs-block"></div>
+							</div>
+							<h4 class="center"><a class="btn box-icon" data-toggle="modal" data-target="#join_us">We are hiring!</a></h4>
+							<!--/ .row-->
+							<div class="bg"></div>
+							<!--/ .bg-->
+						</div>
+						<!--/ .block-content-->
+					</div>
+					<!--/ .block-->
+				</div>
+				<!--/ .container-->
+			</section>
 
-    <section class="block-wrapper" id="mentions">
-        <div class="container">
-            <div class="block bg-light bg-expand-both">
-                <div class="block-content">
-                    <h1 class="center">Mentions</h1>
-                    <div class="row">
-                        <div class="col-sm-3 center">
-                            <a href="https://news.ycombinator.com/item?id=11322444" class="btn box-icon" target="_blank">
-                              <img src="assets/img/hn.png">
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <div class="col-sm-3 center yahoo-logo">
-                            <a href="https://finance.yahoo.com/news/ex-googler-startup-dgraph-labs-170000838.html" class="btn box-icon" target="_blank">
-                              <img src="assets/img/yf.png">
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <div class="col-sm-3 center">
-                            <a href="http://www.afr.com/technology/cannonbrookes-blackbird-bain-back-new-migrants-graph-startup-20160517-goxglw" class="btn box-icon" target="_blank">
-                              <img src="assets/img/afr.png">
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <div class="col-sm-3 center ss">
-                            <a href="http://www.startupsmart.com.au/advice/funding/two-failed-startups-later-ex-google-employee-secures-1-45-million-in-funding-and-backing-of-atlassians-co-founder/" class="btn box-icon" target="_blank">
-                              <img src="assets/img/ss.png">
-                            </a>
-                            <!--/ .box-icon-->
-                        </div>
-                        <!--/ .col-md-4 col-sm-4-->
-                    </div>
+			<section class="block-wrapper" id="mentions">
+				<div class="container">
+					<div class="block bg-light bg-expand-both">
+						<div class="block-content">
+							<h1 class="center">Mentions</h1>
+							<div class="row">
+								<div class="col-sm-3 center">
+									<a href="https://news.ycombinator.com/item?id=11322444" class="btn box-icon" target="_blank">
+										<img src="assets/img/hn.png">
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<div class="col-sm-3 center yahoo-logo">
+									<a href="https://finance.yahoo.com/news/ex-googler-startup-dgraph-labs-170000838.html" class="btn box-icon" target="_blank">
+										<img src="assets/img/yf.png">
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<div class="col-sm-3 center">
+									<a href="http://www.afr.com/technology/cannonbrookes-blackbird-bain-back-new-migrants-graph-startup-20160517-goxglw" class="btn box-icon" target="_blank">
+										<img src="assets/img/afr.png">
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<div class="col-sm-3 center ss">
+									<a href="http://www.startupsmart.com.au/advice/funding/two-failed-startups-later-ex-google-employee-secures-1-45-million-in-funding-and-backing-of-atlassians-co-founder/" class="btn box-icon" target="_blank">
+										<img src="assets/img/ss.png">
+									</a>
+									<!--/ .box-icon-->
+								</div>
+								<!--/ .col-md-4 col-sm-4-->
+							</div>
 
-                    <!--/ .row-->
-                    <div class="bg"></div>
-                    <!--/ .bg-->
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
-    
-    <section class="block-wrapper" id="features">
-        <div class="container">
-            <div class="block bg-light bg-expand-both no-bottom-padding">
-                <div class="block-content">
-                    <h2 class="center">Learn more about Dgraph at</h2>
+							<!--/ .row-->
+							<div class="bg"></div>
+							<!--/ .bg-->
+						</div>
+						<!--/ .block-content-->
+					</div>
+					<!--/ .block-->
+				</div>
+				<!--/ .container-->
+			</section>
 
-                    <div class="buttonrow animate idle from-bottom">
-                        <a href="https://github.com/dgraph-io/dgraph" target="_blank"
-                           class="btn btn-framed btn-light btn-default btn-xl roll">
-                            <i class="fa fa-github text-color-dark"></i>
-                            Github
-                        </a>
+			<section class="block-wrapper" id="features">
+				<div class="container">
+					<div class="block bg-light bg-expand-both no-bottom-padding">
+						<div class="block-content">
+							<h2 class="center">Learn more about Dgraph at</h2>
 
-                        <a href="https://slack.dgraph.io" target="_blank"
-                           class="btn btn-framed btn-light btn-default btn-xl roll">
-                            <img src="https://slack.dgraph.io/badge.svg">
-                        </a>
+							<div class="buttonrow animate idle from-bottom">
+								<a href="https://github.com/dgraph-io/dgraph" target="_blank"
+																											class="btn btn-framed btn-light btn-default btn-xl roll">
+									<i class="fa fa-github text-color-dark"></i>
+									Github
+								</a>
 
-                        <a href="https://discuss.dgraph.io/" target="_blank"
-                           class="btn btn-framed btn-light btn-default btn-xl roll">
-                          <img class="img-icon" src="assets/img/discourse.png">
-                        </a>
+								<a href="https://slack.dgraph.io" target="_blank"
+																					class="btn btn-framed btn-light btn-default btn-xl roll">
+									<img src="https://slack.dgraph.io/badge.svg">
+								</a>
 
-                        <a href="https://open.dgraph.io" target="_blank"
-                           class="btn btn-framed btn-light btn-default btn-xl roll">Blog</a>
+								<a href="https://discuss.dgraph.io/" target="_blank"
+																						 class="btn btn-framed btn-light btn-default btn-xl roll">
+									<img class="img-icon" src="assets/img/discourse.png">
+								</a>
 
-                        <a href="mailto:contact@dgraph.io" target="_blank"
-                           class="btn btn-framed btn-light btn-default btn-xl roll">
-                        <i class="fa fa-lg fa-envelope-o text-color-dark"></i>
-                            Email
-                        </a>
-                    </div>
-                </div>
-                <!--/ .block-content-->
-            </div>
-            <!--/ .block-->
-        </div>
-        <!--/ .container-->
-    </section>
-    <!--/ .block-wrapper-->
+								<a href="https://open.dgraph.io" target="_blank"
+																				 class="btn btn-framed btn-light btn-default btn-xl roll">Blog</a>
 
-    <section class="block-wrapper" id="footer">
-        <div class="container">
-            <div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
-                <div class="block-content">
-                    <div class="row center">Copyright © 2016 Dgraph Labs, Inc.</div>
-                    <div class="bg"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+								<a href="mailto:contact@dgraph.io" target="_blank"
+																					 class="btn btn-framed btn-light btn-default btn-xl roll">
+									<i class="fa fa-lg fa-envelope-o text-color-dark"></i>
+									Email
+								</a>
+							</div>
+						</div>
+						<!--/ .block-content-->
+					</div>
+					<!--/ .block-->
+				</div>
+				<!--/ .container-->
+			</section>
+			<!--/ .block-wrapper-->
 
-<script type="text/javascript" src="/assets/js/jquery-2.1.0.min.js"></script>
-<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+			<section class="block-wrapper" id="footer">
+				<div class="container">
+					<div class="block bg-dark bg-opacity-80 bg-expand-both x-va-middle">
+						<div class="block-content">
+							<div class="row center">Copyright © 2016 Dgraph Labs, Inc.</div>
+							<div class="bg"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 
-<script src="bower_components/angular/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ext-language_tools.js"></script>
-<!--<script src="bower_components/ace-builds/src/ace.js"></script>-->
-<!--<script src="bower_components/ace-builds/src/ext-language_tools.js"></script>-->
+		<script type="text/javascript" src="/assets/js/jquery-2.1.0.min.js"></script>
+		<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
-<script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
-<script src="typeahead.js"></script>
-<script src="app.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ace.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.2/ext-language_tools.js"></script>
+		<!--<script src="bower_components/ace-builds/src/ace.js"></script>-->
+		<!--<script src="bower_components/ace-builds/src/ext-language_tools.js"></script>-->
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="/assets/js/owl.carousel.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.appear.js"></script>
-<script type="text/javascript" src="/assets/js/readmore.min.js"></script>
-<script type="text/javascript" data-pace-options='{ "ajax": false }' src="/assets/js/pace.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.countTo.js"></script>
+		<script src="bower_components/angular-ui-ace/ui-ace.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+		<script src="typeahead.js"></script>
+		<script src="app.js"></script>
 
-<script type="text/javascript" src="/assets/js/custom.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="/assets/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="/assets/js/owl.carousel.min.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.appear.js"></script>
+		<script type="text/javascript" src="/assets/js/readmore.min.js"></script>
+		<script type="text/javascript" data-pace-options='{ "ajax": false }' src="/assets/js/pace.min.js"></script>
+		<script type="text/javascript" src="/assets/js/jquery.countTo.js"></script>
 
-<link rel="stylesheet" href="bower_components/angular-ui/build/angular-ui.min.css">
+		<script type="text/javascript" src="/assets/js/custom.js"></script>
 
-</body>
+		<link rel="stylesheet" href="bower_components/angular-ui/build/angular-ui.min.css">
+
+	</body>
