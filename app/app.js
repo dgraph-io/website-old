@@ -275,7 +275,7 @@ angular.module('darthGraph', ['ui.ace', 'ui.bootstrap']).
                 $scope.had_network_error = false;
                 $scope.lastReceivedVersion = currentCodeVersion;
 
-                $scope.query_result = response.data.debug && response.data.debug[0];
+                $scope.query_result = response.data.debug;
                 $scope.json_result = JSON.stringify($scope.query_result, null, 2);
 
                 $scope.cache_entities($scope.query_result);
